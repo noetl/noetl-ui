@@ -1,0 +1,76 @@
+#paper {
+    position: relative;
+    border: 1px solid gray;
+    display: inline-block;
+    background: transparent;
+    width: 100%;
+}
+#paper svg {
+    background: transparent;
+}
+#paper svg .link {
+    z-index: 2;
+}
+
+
+#html_elements {
+    position: relative;
+    transform-origin: 0px 0px 0px;
+}
+
+#html_elements * {
+    transform-origin: 0px 0px 0px;
+}
+
+.action-element {
+    position: absolute;
+    background: rgb(75, 74, 103);
+    /* Make sure events are propagated to the JointJS element so, e.g. dragging works.*/
+    pointer-events: none;
+    -webkit-user-select: none;
+    /*pointer-events: auto;*/
+    border-radius: 4px;
+    padding: 5px;
+    box-sizing: border-box;
+    z-index: 2;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    transition: box-shadow 0.2s ease;
+}
+
+.action-element.active{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+}
+.action-element.active button.delete{
+    display: block;
+}
+.action-element button {
+    /* Enable interacting with inputs only. */
+    pointer-events: auto;
+    display: none;
+}
+
+.action-element button.delete {
+    color: #C0392B;
+    border: none;
+    background-color: white;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 0px;
+    font-size: 18px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+.action-element button.delete:hover {
+
+}
+
+.action-element span.title {
+    color: white;
+    font-size: 14px;
+}
