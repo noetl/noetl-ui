@@ -97,6 +97,9 @@ Vue.component('popup-component', {
     this.body = document.getElementsByTagName('body')[0];
     $popupService.add(this.popupId, this);
   },
+  beforeDestroy: function () {
+    $popupService.remove(this.popupId);
+  },
   methods: {
     clickPopup: function(event) {
       let e = event.target;
