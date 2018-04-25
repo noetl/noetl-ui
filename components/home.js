@@ -1,3 +1,4 @@
+'use strict';
 Vue.component('home', {
   template: `
   <div class="flows-page">
@@ -34,10 +35,23 @@ Vue.component('home', {
       <button class="button-logs">contact us</button>
       <button class="button-logs">our team</button>
     </div>
+    <popup-component 
+    v-bind:popupId="'create'">
+      <div class="noetl-popup">
+        <span data-close class="close">×</span>
+        
+      </div> 
+    </popup-component>
   </div>
   `,
+  mounted() {
+    $popupService.popup('create').open();
+  },
   methods: {
-    toDetainsFlow: function (flowId) {
+    toDetainsFlow: function(flowId) {
+      if(flowId === 0) {
+        $popupService.popup('create').open();
+      } else
       this.$router.push('/flow/' + flowId);
     }
   },
