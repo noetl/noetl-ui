@@ -39,13 +39,27 @@ Vue.component('home', {
     v-bind:popupId="'create'">
       <div class="noetl-popup">
         <span data-close class="close">×</span>
-        
+        <div class="create-project-popup">
+          <h3>Create new project</h3>
+          <div class="action-form-component">
+            <div class="action-form-input">
+              <span>project name: </span>
+              <input name="title" type="text" value="">
+            </div>
+            <div class="action-form-input">
+              <span>project description: </span>
+              <textarea name="description"></textarea>
+            </div>
+          </div>
+          <button class="noetl-button" v-on:click="createProject(0)">Create project</button>
+          <button class="noetl-button">import project</button>
+        </div>
       </div> 
     </popup-component>
   </div>
   `,
   mounted() {
-    $popupService.popup('create').open();
+    //$popupService.popup('create').open();
   },
   methods: {
     toDetainsFlow: function(flowId) {
@@ -53,7 +67,10 @@ Vue.component('home', {
         $popupService.popup('create').open();
       } else
       this.$router.push('/flow/' + flowId);
-    }
+    },
+    createProject: function(flowId) {
+      this.$router.push('/flow/' + flowId);
+    },
   },
   data: function () {
     return {
