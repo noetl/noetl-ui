@@ -1,34 +1,27 @@
 'use strict';
-Vue.component('home', {
+Vue.component('admin', {
   template: `
-  <div class="flows-page">
+  <div class="admin-page">
     <div class="flow-header">
       <div class="flow-title">
         <h1>NOETL</h1>
       </div>
       <div class="flow-header-panel">
-        
+        <button class="noetl-button" v-on:click="openPopupNewProject()">new project</button>
+        <button style="margin-left: 20px" class="noetl-button">import project</button>
       </div>
     </div>
     <div class="noetl-container">
-      <div class="flows-grid">
-        <div v-on:click="toDetainsFlow(0)" class="create-flow">
-          <span class="plus">+</span>
-          <span class="text">New project</span>
-        </div>
-        <div v-on:click="toDetainsFlow(1)" class="flow-item-grid">
-          <h3 class="flow-item-grid-title">Распределитель серверных процесов 1</h3>
-          <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
-        </div>
-        <div v-on:click="toDetainsFlow(2)" class="flow-item-grid">
-          <h3 class="flow-item-grid-title">Распределитель серверных процесов 2</h3>
-          <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
-        </div>
-        <div v-on:click="toDetainsFlow(3)" class="flow-item-grid">
-          <h3 class="flow-item-grid-title">Распределитель серверных процесов 3</h3>
-          <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+      <div class="noetl-left-menu">
+        <div class="menu-group">
+          <router-link class="menu-item" v-bind:to="{ name: 'flows'}">flows</router-link>
+          <router-link class="menu-item" v-bind:to="{ name: 'processes'}">processes</router-link>
         </div>
       </div>
+      <div class="noetl-paper-wrapper">
+        <router-view></router-view>
+      </div>
+      
     </div>
     <div class="flow-footer">
       <button class="button-logs">support</button>
@@ -47,12 +40,15 @@ Vue.component('home', {
               <input name="title" type="text" value="">
             </div>
             <div class="action-form-input">
+              <span>project group: </span>
+              <input name="title" type="text" value="">
+            </div>
+            <div class="action-form-input">
               <span>project description: </span>
               <textarea name="description"></textarea>
             </div>
           </div>
           <button class="noetl-button" v-on:click="createProject(0)">Create project</button>
-          <button class="noetl-button">import project</button>
         </div>
       </div> 
     </popup-component>
@@ -62,10 +58,10 @@ Vue.component('home', {
     //$popupService.popup('create').open();
   },
   methods: {
+    openPopupNewProject: function() {
+      $popupService.popup('create').open();
+    },
     toDetainsFlow: function(flowId) {
-      if(flowId === 0) {
-        $popupService.popup('create').open();
-      } else
       this.$router.push('/flow/' + flowId);
     },
     createProject: function(flowId) {

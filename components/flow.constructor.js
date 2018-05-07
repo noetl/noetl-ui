@@ -216,15 +216,12 @@ Vue.component('flow-constructor', {
     }
 
     var startGraph = {
-      "inputWorkFlow": ["b", "c"],
-      "b": ["f"],
-      "c": ["e", "d"],
-      "d": ["inputWorkFlow", "vv"],
-      "e": ["vv"],
-      "f": ["g"],
-      "g": ["outputWorkFlow"],
-      "vv": ["outputWorkFlow"],
-      "outputWorkFlow": []
+      "job1": ["step1", "step2"],
+      "step1": ["step2"],
+      "step2": ["step3", "step4"],
+      "step3": ["step5"],
+      "step4": ["step5"],
+      "step5": []
     };
     $('#adjacency-list').html(JSON.stringify(startGraph, null, 1));
 

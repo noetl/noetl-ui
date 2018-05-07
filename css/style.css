@@ -1,3 +1,35 @@
+.card {
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    height: 300px;
+    margin: 1rem;
+    position: relative;
+    width: 300px;
+}
+
+.card-1 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-2 {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.card-3 {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.card-4 {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card-5 {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -19,7 +51,7 @@
     background-color: #90A4AE;
 }
 
-html, body, .flow-constructor, .flows-page {
+html, body, .flow-constructor, .admin-page {
     position: relative;
     width: 100%;
     height: 100%;
@@ -194,7 +226,7 @@ body {
 .noetl-paper-wrapper {
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .actions-form-wrapper {
@@ -253,7 +285,6 @@ body {
     position: relative;
     padding: 0 5px 0 34px;
     background: #78909C;
-    position: relative;
     left: 0;
     width: 100%;
     height: 31px;
@@ -311,64 +342,54 @@ body {
 }
 
 /* home page */
-.flows-grid {
+.flows {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10px;
 }
 
-.flows-grid .flow-item-grid {
-    width: 200px;
-    height: 200px;
-    background-color: #607D8B;
-    color: white;
+.flows .flow-item {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    color: #607D8B;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;
+    margin-bottom: 0;
     cursor: pointer;
     transition: box-shadow 0.2s ease;
 }
 
-.flows-grid .flow-item-grid:hover {
+.flows .flow-item:hover {
     box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
 }
 
-.flows-grid .create-flow {
-    width: 200px;
-    height: 200px;
-    border: 1px solid #607D8B;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
-    color: #607D8B;
-    margin: 10px;
-    padding: 20px;
-    transition: background-color 0.2s ease;
-}
-
-.flows-grid .create-flow:hover {
-    background-color: #ECEFF1;
-}
-
-.flows-grid .create-flow  .plus{
-    font-size: 45px;
-    font-weight: 200;
-}
-
-.flows-grid .flow-item-grid .flow-item-grid-title {
+.flows .flow-item .flow-item-title {
     font-size: 14px;
     margin-top: 0;
 }
 
-.flows-grid .flow-item-grid p {
+
+.flows .flow-item h3 {
+    margin-bottom: 5px;
+}
+
+.flows .flow-item p {
     font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .noetl-popup {
     background-color: #546E7A;
     width: 100%;
     max-width: 300px;
-    min-height: 400px;
+    min-height: 100px;
     margin: auto;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
@@ -402,7 +423,7 @@ body {
     padding: 7px 12px;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 14px;
     outline: none;
 }
 .noetl-button:hover{
@@ -422,4 +443,29 @@ body {
     width: calc(100% - 30px);
     margin-top: 15px;
     color: #546E7A;
+}
+
+.menu-group .menu-item {
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.menu-group .menu-item:hover {
+    background-color: #4e6874;
+}
+
+.menu-group .menu-item.router-link-exact-active, .menu-group .menu-item.router-link-active {
+    background-color: #4e6874;
+}
+
+.flows-page {
+    display: flex;
+}
+
+.flows-page .tree-directories-component {
+    min-width: 300px;
 }
