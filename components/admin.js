@@ -8,7 +8,6 @@ Vue.component('admin', {
       </div>
       <div class="flow-header-panel">
         <button class="noetl-button" v-on:click="openPopupNewProject()">new project</button>
-        <button style="margin-left: 20px" class="noetl-button">import project</button>
       </div>
     </div>
     <div class="noetl-container">

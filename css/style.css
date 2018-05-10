@@ -1,9 +1,109 @@
+
+/* tree component */
+.item-tree {
+    cursor: pointer;
+}
+.bold {
+    font-weight: bold;
+}
+.tree-directory {
+    padding-left: 28px;
+    line-height: 1.5em;
+    list-style-type: none;
+}
+
+.fas-tree-directory {
+    position: relative;
+}
+
+.fas-tree-directory:before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: -25px;
+    top: 0;
+}
+
+.item-header-container{
+    display: flex;
+}
+.item-header-container:hover .tree-item-panel {
+    display: flex;
+}
+.tree-item-panel {
+    display: none;
+}
+.tree-item-panel .tree-item-panel-icon {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.tree-directory-root {
+    margin: 8px;
+}
+/*END tree component */
+html {
+    --tooltip-bg-color: #3c3d46;
+    --tooltip-color: #fff;
+}
+.tooltip{
+    display: block;
+    max-width: 200px;
+    min-height: 1px;
+    background-color: var(--tooltip-bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    color: var(--tooltip-color);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    padding: 5px 20px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.tooltip-arrow{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+}
+.tooltip.bottom .tooltip-arrow{
+    border-bottom-color: var(--tooltip-bg-color);
+    border-top: 0;
+    left: calc(50% - 3px);
+    transform: translate(0, -100%);
+    top: 0;
+}
+.tooltip.top .tooltip-arrow{
+    border-top-color: var(--tooltip-bg-color);
+    border-bottom: 0;
+    left: calc(50% - 3px);
+    transform: translate(0, 100%);
+    bottom: 0;
+}
+.tooltip.left .tooltip-arrow{
+    border-left-color: var(--tooltip-bg-color);
+    border-right: 0;
+    top: calc(50% - 6px);
+    transform: translate(100%, 0);
+    right: 0;
+}
+.tooltip.right .tooltip-arrow{
+    border-right-color: var(--tooltip-bg-color);
+    border-left: 0;
+    top: calc(50% - 6px);
+    transform: translate(-100%, 0);
+    left: 0;
+}
+
 .card {
     background: #fff;
     border-radius: 2px;
     display: inline-block;
     height: 300px;
-    margin: 1rem;
+    margin: 10px;
     position: relative;
     width: 300px;
 }
@@ -363,6 +463,7 @@ body {
     margin-bottom: 0;
     cursor: pointer;
     transition: box-shadow 0.2s ease;
+    overflow: hidden;
 }
 
 .flows .flow-item:hover {
@@ -464,8 +565,11 @@ body {
 
 .flows-page {
     display: flex;
+    height: 100%;
 }
 
 .flows-page .tree-directories-component {
-    min-width: 300px;
+    min-width: 50%;
+    border-right: 2px solid #7ea5b2;
+    height: 100%;
 }

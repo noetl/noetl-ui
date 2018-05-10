@@ -4,7 +4,7 @@
 
 const router = new VueRouter({
   routes: [
-    { path: '/', redirect: '/admin'},
+    { path: '/', redirect: '/admin/flows'},
     { path: '/admin',
       component: Vue.component('admin'),
       children: [

@@ -1,9 +1,42 @@
 'use strict';
+var data = {
+  name: 'root',
+  root: true,
+  children: [
+    {
+      name: 'adiona',
+      children: [
+        {
+          name: 'adionalab',
+          children: [
+            { name: 'Распределитель серверных процесов 1' },
+            { name: 'Распределитель серверных процесов 2' }
+          ]
+        },
+        {
+          name: 'cyberionix',
+          children: [
+            { name: 'Распределитель серверных процесов 1' },
+            { name: 'Распределитель серверных процесов 2' }
+          ]
+        },
+        { name: 'автоматизация deploy для dev' },
+        { name: 'автоматизация deploy для production' },
+
+      ]
+    },
+    { name: 'Распределитель серверных процесов 4' },
+    { name: 'Распределитель серверных процесов 5' },
+  ]
+};
+
 Vue.component('flows', {
   template: `
   <div class="flows-page">
-    <div class="card card-1 tree-directories-component">
-    
+    <div class="tree-directories-component">
+      <tree
+        :model="treeData">
+      </tree>
     </div>
     <div class="flows">
      <div v-on:click="toDetainsFlow(1)" class="card card-1 flow-item">
@@ -14,6 +47,46 @@ Vue.component('flows', {
        Автоматизация перезапуска серверов и проверка их на вирусы
        Автоматизация перезапуска серверов и проверка их на вирусыАвтоматизация перезапуска серверов и проверка их на вирусыАвтоматизация перезапуска серверов и проверка их на вирусы     
        </p>
+     </div>
+     <div v-on:click="toDetainsFlow(2)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 2</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(3)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 3</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(2)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 2</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(3)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 3</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(2)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 2</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(3)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 3</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(2)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 2</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(3)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 3</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(2)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 2</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
+     </div>
+     <div v-on:click="toDetainsFlow(3)" class="card card-1 flow-item">
+       <h3 class="flow-item-title">Распределитель серверных процесов 3</h3>
+       <p>Автоматизация перезапуска серверов и проверка их на вирусы</p>
      </div>
      <div v-on:click="toDetainsFlow(2)" class="card card-1 flow-item">
        <h3 class="flow-item-title">Распределитель серверных процесов 2</h3>
@@ -39,7 +112,8 @@ Vue.component('flows', {
   },
   data: function () {
     return {
-      isShowLogs: false
+      isShowLogs: false,
+      treeData: data
     }
   },
 });
