@@ -2,12 +2,15 @@
 var data = {
   name: 'root',
   root: true,
+  isOpen: true,
   children: [
     {
       name: 'adiona',
+      isOpen: true,
       children: [
         {
           name: 'adionalab',
+          isOpen: false,
           children: [
             { name: 'Распределитель серверных процесов 1' },
             { name: 'Распределитель серверных процесов 2' }
@@ -15,6 +18,7 @@ var data = {
         },
         {
           name: 'cyberionix',
+          isOpen: false,
           children: [
             { name: 'Распределитель серверных процесов 1' },
             { name: 'Распределитель серверных процесов 2' }

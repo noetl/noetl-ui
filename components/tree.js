@@ -6,7 +6,7 @@ Vue.component('tree-item', {
     <div class="item-header-container">
       <div class="fas-tree-directory"
         v-if="isFolder"
-        v-bind:class="{ 'fa-folder-open': open, 'fa-folder': !open}"
+        v-bind:class="{ 'fa-folder-open': model.isOpen, 'fa-folder': !model.isOpen}"
         v-on:click="toggle">
       </div>
       <div class="fas-tree-directory fa-code-branch"
@@ -42,22 +42,24 @@ Vue.component('tree-item', {
       </div>
     </div>
     <ul class="tree-directory"
-        v-show="open" v-if="isFolder">
+        v-show="model.isOpen" v-if="isFolder">
       <tree-item
         class="item-tree"
-        v-for="(model, index) in model.children"
+        v-for="(model, index) in sortByDirectories(model.children)"
         :key="index"
-        :model="model">
+        :model="model"
+        :path="path + '/' + model.name">
       </tree-item>
     </ul>
   </li>
   `,
   props: {
-    model: Object
+    model: Object,
+    path: String
   },
   data: function () {
     return {
-      open: false
+
     }
   },
   computed: {
@@ -68,31 +70,37 @@ Vue.component('tree-item', {
   methods: {
     setOpen: function (open) {
       if (this.isFolder) {
-        this.open = open
+        this.model.isOpen = open
       }
     },
     toggle: function () {
       if (this.isFolder) {
-        this.open = !this.open
-      }
-    },
-    changeType: function () {
-      if (!this.isFolder) {
-        Vue.set(this.model, 'children', [])
-        this.open = true
+        this.model.isOpen = !this.model.isOpen
       }
     },
     toDashboard: function () {
 
     },
     addflow: function () {
+      $popupService.popup('create').open();
       this.model.children.push({
         name: 'new flow'
       })
     },
+    sortByDirectories: function(array) {
+      var copy = Object.assign([], array);
+      copy.sort(function (a, b){
+        if(a.children==undefined && b.children!==undefined)
+          return 1;
+        else return 0;
+      });
+      return copy;
+    },
     addDirectory: function () {
+      console.log(this.path);
       this.model.children.push({
         name: 'new directory',
+        isOpen: true,
         children: []
       })
     }
@@ -104,12 +112,39 @@ Vue.component('tree', {
   <ul class="tree-directory tree-directory-root">
     <tree-item
       class="item-tree"
-      :model="model">
+      :model="model"
+      :path="model.name">
     </tree-item>
+    
+    <popup-component 
+    v-bind:popupId="'create'">
+      <div class="noetl-popup">
+        <span data-close class="close">×</span>
+        <div class="create-project-popup">
+          <h3>Create new project</h3>
+          <div class="action-form-component">
+            <div class="action-form-input">
+              <span>project name: </span>
+              <input name="title" type="text" value="">
+            </div>
+            <div class="action-form-input">
+              <span>project group: </span>
+              <input name="title" type="text" value="">
+            </div>
+            <div class="action-form-input">
+              <span>project description: </span>
+              <textarea name="description"></textarea>
+            </div>
+          </div>
+          <button class="noetl-button" v-on:click="createProject(0)">Create project</button>
+        </div>
+      </div> 
+    </popup-component>
   </ul>
   `,
   props: {
-    model: Object
+    model: Object,
+    path: String
   },
   data: function () {
     return {

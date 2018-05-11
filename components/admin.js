@@ -27,30 +27,7 @@ Vue.component('admin', {
       <button class="button-logs">contact us</button>
       <button class="button-logs">our team</button>
     </div>
-    <popup-component 
-    v-bind:popupId="'create'">
-      <div class="noetl-popup">
-        <span data-close class="close">×</span>
-        <div class="create-project-popup">
-          <h3>Create new project</h3>
-          <div class="action-form-component">
-            <div class="action-form-input">
-              <span>project name: </span>
-              <input name="title" type="text" value="">
-            </div>
-            <div class="action-form-input">
-              <span>project group: </span>
-              <input name="title" type="text" value="">
-            </div>
-            <div class="action-form-input">
-              <span>project description: </span>
-              <textarea name="description"></textarea>
-            </div>
-          </div>
-          <button class="noetl-button" v-on:click="createProject(0)">Create project</button>
-        </div>
-      </div> 
-    </popup-component>
+    
   </div>
   `,
   mounted() {
