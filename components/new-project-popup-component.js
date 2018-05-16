@@ -1,7 +1,7 @@
 Vue.component('new-project-popup', {
   template: `
 <popup-component 
- v-bind:popupId="'new-project'">
+ v-bind:popupId="popupId">
   <div class="noetl-popup">
     <span data-close class="close">×</span>
     <div class="create-project-popup">
@@ -29,6 +29,7 @@ Vue.component('new-project-popup', {
   },
   data: function () {
     return {
+      popupId: 'new-project',
       form: {
         name: '',
         description: '',
@@ -40,7 +41,7 @@ Vue.component('new-project-popup', {
 
   },
   mounted() {
-    $popupService.registerPopupComponent('new-project',this);
+    $popupService.registerPopupComponent(this.popupId,this);
   },
   beforeDestroy: function () {
 
@@ -54,12 +55,12 @@ Vue.component('new-project-popup', {
       this.close();
     },
     open: function(path) {
-      $popupService.popup('new-project').open();
+      $popupService.popup(this.popupId).open();
       this.path = path;
     },
 
     close: function() {
-      $popupService.popup('new-project').close();
+      $popupService.popup(this.popupId).close();
       this.path = '';
       this.form.name = '';
       this.form.description = '';

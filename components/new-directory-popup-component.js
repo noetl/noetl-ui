@@ -1,7 +1,7 @@
 Vue.component('new-directory-popup', {
   template: `
 <popup-component 
- v-bind:popupId="'new-directory'">
+ v-bind:popupId="popupId">
   <div class="noetl-popup">
     <span data-close class="close">×</span>
     <div class="create-project-popup">
@@ -25,6 +25,7 @@ Vue.component('new-directory-popup', {
   },
   data: function () {
     return {
+      popupId: 'new-directory',
       dirName: '',
       path: ''
     }
@@ -33,7 +34,7 @@ Vue.component('new-directory-popup', {
 
   },
   mounted() {
-    $popupService.registerPopupComponent('new-directory',this);
+    $popupService.registerPopupComponent(this.popupId,this);
   },
   beforeDestroy: function () {
 
@@ -44,14 +45,14 @@ Vue.component('new-directory-popup', {
       this.close();
     },
     open: function(path) {
-      $popupService.popup('new-directory').open();
+      $popupService.popup(this.popupId).open();
       this.path = path;
     },
 
     close: function() {
-      $popupService.popup('new-directory').close();
+      $popupService.popup(this.popupId).close();
       this.path = '';
-      this.dirName = 0;
+      this.dirName = '';
     }
   }
 });

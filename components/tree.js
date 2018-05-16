@@ -31,11 +31,13 @@ Vue.component('tree-item', {
         </div>
         <div class="tree-item-panel-icon"
              v-show="!model.root && isFolder"
+             v-on:click="removeDirectory();"
              v-tooltip:hover="{ title: 'Remove folder recursive', position: 'top' }">
           <i class="fas fa-trash-alt"></i>
         </div>
         <div class="tree-item-panel-icon"
              v-show="!model.root && !isFolder"
+             v-on:click="removeProject();"
              v-tooltip:hover="{ title: 'Remove flow', position: 'top' }">
           <i class="fas fa-trash-alt"></i>
         </div>
@@ -79,9 +81,6 @@ Vue.component('tree-item', {
     toDashboard: function () {
 
     },
-    addflow: function () {
-      $popupService.getPopupComponent('new-project').open(this.path);
-    },
     sortByDirectories: function (array) {
       var copy = Object.assign([], array);
       copy.sort(function (a, b) {
@@ -91,7 +90,16 @@ Vue.component('tree-item', {
       });
       return copy;
     },
+    addflow: function () {
+      $popupService.getPopupComponent('new-project').open(this.path);
+    },
     addDirectory: function () {
+      $popupService.getPopupComponent('new-directory').open(this.path);
+    },
+    removeProject: function () {
+      $popupService.getPopupComponent('new-project').open(this.path);
+    },
+    removeDirectory: function () {
       $popupService.getPopupComponent('new-directory').open(this.path);
     }
   }
