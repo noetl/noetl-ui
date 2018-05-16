@@ -98,6 +98,7 @@ Vue.component('popup-component', {
     $popupService.add(this.popupId, this);
   },
   beforeDestroy: function () {
+    this.close();
     $popupService.remove(this.popupId);
   },
   methods: {

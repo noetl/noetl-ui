@@ -58,9 +58,7 @@ Vue.component('tree-item', {
     path: String
   },
   data: function () {
-    return {
-
-    }
+    return {}
   },
   computed: {
     isFolder: function () {
@@ -82,27 +80,19 @@ Vue.component('tree-item', {
 
     },
     addflow: function () {
-      $popupService.popup('create').open();
-      this.model.children.push({
-        name: 'new flow'
-      })
+      $popupService.getPopupComponent('new-project').open(this.path);
     },
-    sortByDirectories: function(array) {
+    sortByDirectories: function (array) {
       var copy = Object.assign([], array);
-      copy.sort(function (a, b){
-        if(a.children==undefined && b.children!==undefined)
+      copy.sort(function (a, b) {
+        if (a.children == undefined && b.children !== undefined)
           return 1;
         else return 0;
       });
       return copy;
     },
     addDirectory: function () {
-      console.log(this.path);
-      this.model.children.push({
-        name: 'new directory',
-        isOpen: true,
-        children: []
-      })
+      $popupService.getPopupComponent('new-directory').open(this.path);
     }
   }
 });
@@ -115,31 +105,8 @@ Vue.component('tree', {
       :model="model"
       :path="model.name">
     </tree-item>
-    
-    <popup-component 
-    v-bind:popupId="'create'">
-      <div class="noetl-popup">
-        <span data-close class="close">×</span>
-        <div class="create-project-popup">
-          <h3>Create new project</h3>
-          <div class="action-form-component">
-            <div class="action-form-input">
-              <span>project name: </span>
-              <input name="title" type="text" value="">
-            </div>
-            <div class="action-form-input">
-              <span>project group: </span>
-              <input name="title" type="text" value="">
-            </div>
-            <div class="action-form-input">
-              <span>project description: </span>
-              <textarea name="description"></textarea>
-            </div>
-          </div>
-          <button class="noetl-button" v-on:click="createProject(0)">Create project</button>
-        </div>
-      </div> 
-    </popup-component>
+    <new-directory-popup v-bind:createDirectory="createDirectory"></new-directory-popup>
+    <new-project-popup v-bind:createProject="createProject"></new-project-popup>
   </ul>
   `,
   props: {
@@ -147,8 +114,34 @@ Vue.component('tree', {
     path: String
   },
   data: function () {
-    return {
-
+    return {}
+  },
+  methods: {
+    getListFailsByPath: function (path) {
+      let arrayPath = path.split('/');
+      console.log(arrayPath);
+      let directoryObj = [this.model];
+      for (let i = 0; i < arrayPath.length; i++) {
+        for (let j = 0; j < arrayPath.length; j++) {
+          if(directoryObj[j].name === arrayPath[i]) {
+            directoryObj = directoryObj[j].children;
+            break;
+          }
+        }
+      }
+      return directoryObj;
+    },
+    createDirectory: function (path, dirName) {
+      this.getListFailsByPath(path).push({
+        name: dirName,
+        isOpen: true,
+        children: []
+      });
+    },
+    createProject: function (path, projectData) {
+      this.getListFailsByPath(path).push({
+        name: projectData.name
+      });
     }
   },
 });
