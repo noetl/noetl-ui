@@ -9,7 +9,7 @@ Vue.component('new-project-popup', {
       <div class="action-form-component">
         <div class="action-form-input">
           <span>project name: </span>
-          <input name="title" type="text" v-model="form.name">
+          <input ref="firstInput" name="title" type="text" v-model="form.name">
         </div>
         <div class="action-form-input">
           <span>project description: </span>
@@ -56,6 +56,7 @@ Vue.component('new-project-popup', {
     },
     open: function(path) {
       $popupService.popup(this.popupId).open();
+      this.$refs.firstInput.focus();
       this.path = path;
     },
 

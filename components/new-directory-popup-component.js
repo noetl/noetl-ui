@@ -9,7 +9,7 @@ Vue.component('new-directory-popup', {
       <div class="action-form-component">
         <div class="action-form-input">
           <span>directory name: </span>
-          <input name="title" type="text" value="" v-model="dirName">
+          <input ref="firstInput" name="title" type="text" value="" v-model="dirName">
         </div>
       </div>
       <button class="noetl-button" v-on:click="create(path, dirName)">Create directory</button>
@@ -46,6 +46,7 @@ Vue.component('new-directory-popup', {
     },
     open: function(path) {
       $popupService.popup(this.popupId).open();
+      this.$refs.firstInput.focus();
       this.path = path;
     },
 

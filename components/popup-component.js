@@ -1,35 +1,30 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-      (global.$popupService = factory());
-}(this, (function () {
-    'use strict';
-    function PopupService() {
-      this.popups = {};
+this.$popupService = function () {
+  'use strict';
+  function PopupService() {
+    this.popups = {};
+  }
+  PopupService.prototype.add = function (popupId, Popup) {
+    this.popups[popupId] = Popup;
+  };
+  PopupService.prototype.remove = function (id) {
+    this.popups[id] = undefined;
+  };
+  PopupService.prototype.popup = function (id) {
+    return this.popups[id];
+  };
+  PopupService.prototype.getPopupComponent = function (id) {
+    return this.popups[id]._component;
+  };
+  PopupService.prototype.registerPopupComponent = function (id, component) {
+    if (this.popups[id] !== undefined) {
+      this.popups[id]._component = component;
     }
-    PopupService.prototype.add = function (popupId, Popup) {
-      this.popups[popupId] = Popup;
-    };
-    PopupService.prototype.remove = function (id) {
-      this.popups[id] = undefined;
-    };
-    PopupService.prototype.popup = function (id) {
-      return this.popups[id];
-    };
-    PopupService.prototype.getPopupComponent = function (id) {
-      return this.popups[id]._component;
-    };
-    PopupService.prototype.registerPopupComponent = function (id, component) {
-      if (this.popups[id] !== undefined) {
-        this.popups[id]._component = component;
-      }
-      else {
-        console.error('Please use registerPopupComponent("' + id + '", this) in  ngAfterViewInit() method');
-      }
-    };
-    return new PopupService();
-  })));
-
+    else {
+      console.error('Please use registerPopupComponent("' + id + '", this) in  ngAfterViewInit() method');
+    }
+  };
+  return new PopupService();
+}();
 
 Vue.component('popup-component', {
   template: `
