@@ -1,46 +1,11 @@
 'use strict';
-var data = {
-  name: 'root',
-  root: true,
-  isOpen: true,
-  children: [
-    {
-      name: 'adiona',
-      isOpen: true,
-      children: [
-        {
-          name: 'adionalab',
-          isOpen: false,
-          children: [
-            { name: 'Распределитель серверных процесов 1' },
-            { name: 'Распределитель серверных процесов 2' }
-          ]
-        },
-        {
-          name: 'cyberionix',
-          isOpen: false,
-          children: [
-            { name: 'Распределитель серверных процесов 1' },
-            { name: 'Распределитель серверных процесов 2' }
-          ]
-        },
-        { name: 'автоматизация deploy для dev' },
-        { name: 'автоматизация deploy для production' },
 
-      ]
-    },
-    { name: 'Распределитель серверных процесов 4' },
-    { name: 'Распределитель серверных процесов 5' },
-  ]
-};
 
 Vue.component('flows', {
   template: `
   <div class="flows-page">
     <div class="tree-directories-component">
-      <tree
-        :model="treeData">
-      </tree>
+      <tree></tree>
     </div>
     <div class="flows">
      <div v-on:click="toDetainsFlow(1)" class="card card-1 flow-item">
@@ -116,8 +81,7 @@ Vue.component('flows', {
   },
   data: function () {
     return {
-      isShowLogs: false,
-      treeData: data
+      isShowLogs: false
     }
   },
 });

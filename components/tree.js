@@ -1,5 +1,40 @@
 'use strict';
 
+var data = {
+  name: 'root',
+  root: true,
+  isOpen: true,
+  children: [
+    // {
+    //   name: 'adiona',
+    //   isOpen: true,
+    //   children: [
+    //     {
+    //       name: 'adionalab',
+    //       isOpen: false,
+    //       children: [
+    //         { name: 'Распределитель серверных процесов 1' },
+    //         { name: 'Распределитель серверных процесов 2' }
+    //       ]
+    //     },
+    //     {
+    //       name: 'cyberionix',
+    //       isOpen: false,
+    //       children: [
+    //         { name: 'Распределитель серверных процесов 1' },
+    //         { name: 'Распределитель серверных процесов 2' }
+    //       ]
+    //     },
+    //     { name: 'автоматизация deploy для dev' },
+    //     { name: 'автоматизация deploy для production' },
+    //
+    //   ]
+    // },
+    // { name: 'Распределитель серверных процесов 4' },
+    // { name: 'Распределитель серверных процесов 5' },
+  ]
+};
+
 Vue.component('tree-item', {
   template: `
   <li>
@@ -124,18 +159,19 @@ Vue.component('tree', {
   </ul>
   `,
   props: {
-    model: Object,
     path: String
   },
   data: function () {
-    return {}
+    return {
+      model: data,
+    }
   },
   methods: {
     getListFailsByPath: function (path) {
       let arrayPath = path.split('/');
       let directoryObj = [this.model];
       for (let i = 0; i < arrayPath.length; i++) {
-        for (let j = 0; j < arrayPath.length; j++) {
+        for (let j = 0; j < directoryObj.length; j++) {
           if(directoryObj[j].name === arrayPath[i]) {
             directoryObj = directoryObj[j].children;
             break;
@@ -143,6 +179,27 @@ Vue.component('tree', {
         }
       }
       return directoryObj;
+    },
+    removeObjectTree: function (path) {
+      let arrayPath = path.split('/');
+      let directoryObj = [this.model];
+      for (let i = 0; i < arrayPath.length - 1; i++) {
+        for (let j = 0; j < directoryObj.length; j++) {
+          if(directoryObj[j].name === arrayPath[i]) {
+            directoryObj = directoryObj[j].children;
+            break;
+          }
+        }
+      }
+      let objectForRemoveName = arrayPath[arrayPath.length - 1];
+      for (let j = 0; j < directoryObj.length; j++) {
+        if(directoryObj[j].name === objectForRemoveName) {
+          if (j > -1) {
+            directoryObj.splice(j, 1);
+          }
+          break;
+        }
+      }
     },
     createDirectory: function (path, dirName) {
       this.getListFailsByPath(path).push({
@@ -152,8 +209,7 @@ Vue.component('tree', {
       });
     },
     removeDirectory: function (path) {
-      console.log(path);
-      console.log(this.getListFailsByPath(path));
+      this.removeObjectTree(path);
     },
     createProject: function (path, projectData) {
       this.getListFailsByPath(path).push({
@@ -161,8 +217,7 @@ Vue.component('tree', {
       });
     },
     removeProject: function (path) {
-      console.log(path);
-      console.log(this.getListFailsByPath(path));
+      this.removeObjectTree(path);
     }
   },
 });
