@@ -97,10 +97,10 @@ Vue.component('tree-item', {
       $popupService.getPopupComponent('new-directory').open(this.path);
     },
     removeProject: function () {
-      $popupService.getPopupComponent('new-project').open(this.path);
+      $popupService.getPopupComponent('confirmation-message:remove_project').open(this.path);
     },
     removeDirectory: function () {
-      $popupService.getPopupComponent('new-directory').open(this.path);
+      $popupService.getPopupComponent('confirmation-message:remove_directory').open(this.path);
     }
   }
 });
@@ -115,6 +115,12 @@ Vue.component('tree', {
     </tree-item>
     <new-directory-popup v-bind:createDirectory="createDirectory"></new-directory-popup>
     <new-project-popup v-bind:createProject="createProject"></new-project-popup>
+    <confirmation-message-popup v-bind:id="'remove_directory'" v-bind:onClickYes="removeDirectory">
+     Вы действительно хотите удалить эту директорию со всеми flow внутри нее?
+    </confirmation-message-popup>
+    <confirmation-message-popup v-bind:id="'remove_project'" v-bind:onClickYes="removeProject">
+      Вы действительно хотите удалить этот проэкт?
+    </confirmation-message-popup>
   </ul>
   `,
   props: {
@@ -127,7 +133,6 @@ Vue.component('tree', {
   methods: {
     getListFailsByPath: function (path) {
       let arrayPath = path.split('/');
-      console.log(arrayPath);
       let directoryObj = [this.model];
       for (let i = 0; i < arrayPath.length; i++) {
         for (let j = 0; j < arrayPath.length; j++) {
@@ -146,10 +151,18 @@ Vue.component('tree', {
         children: []
       });
     },
+    removeDirectory: function (path) {
+      console.log(path);
+      console.log(this.getListFailsByPath(path));
+    },
     createProject: function (path, projectData) {
       this.getListFailsByPath(path).push({
         name: projectData.name
       });
+    },
+    removeProject: function (path) {
+      console.log(path);
+      console.log(this.getListFailsByPath(path));
     }
   },
 });
