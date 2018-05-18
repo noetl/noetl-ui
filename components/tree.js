@@ -1,40 +1,5 @@
 'use strict';
 
-var data = {
-  name: 'root',
-  root: true,
-  isOpen: true,
-  children: [
-    // {
-    //   name: 'adiona',
-    //   isOpen: true,
-    //   children: [
-    //     {
-    //       name: 'adionalab',
-    //       isOpen: false,
-    //       children: [
-    //         { name: 'Распределитель серверных процесов 1' },
-    //         { name: 'Распределитель серверных процесов 2' }
-    //       ]
-    //     },
-    //     {
-    //       name: 'cyberionix',
-    //       isOpen: false,
-    //       children: [
-    //         { name: 'Распределитель серверных процесов 1' },
-    //         { name: 'Распределитель серверных процесов 2' }
-    //       ]
-    //     },
-    //     { name: 'автоматизация deploy для dev' },
-    //     { name: 'автоматизация deploy для production' },
-    //
-    //   ]
-    // },
-    // { name: 'Распределитель серверных процесов 4' },
-    // { name: 'Распределитель серверных процесов 5' },
-  ]
-};
-
 Vue.component('tree-item', {
   template: `
   <li>
@@ -163,7 +128,25 @@ Vue.component('tree', {
   },
   data: function () {
     return {
-      model: data,
+      model: null,
+    }
+  },
+  watch: {
+    model: function (val) {
+      $storageService.setObject('tree-directories', val);
+    }
+  },
+  created: function() {
+    let data = {
+      name: 'root',
+      root: true,
+      isOpen: true,
+      children: []
+    };
+    if($storageService.getObject('tree-directories') == null) {
+      this.model = data;
+    } else {
+      this.model = $storageService.getObject('tree-directories');
     }
   },
   methods: {
@@ -207,17 +190,21 @@ Vue.component('tree', {
         isOpen: true,
         children: []
       });
+      $storageService.setObject('tree-directories', this.model);
     },
     removeDirectory: function (path) {
       this.removeObjectTree(path);
+      $storageService.setObject('tree-directories', this.model);
     },
     createProject: function (path, projectData) {
       this.getListFailsByPath(path).push({
         name: projectData.name
       });
+      $storageService.setObject('tree-directories', this.model);
     },
     removeProject: function (path) {
       this.removeObjectTree(path);
+      $storageService.setObject('tree-directories', this.model);
     }
   },
 });
