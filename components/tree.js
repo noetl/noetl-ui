@@ -41,6 +41,11 @@ Vue.component('tree-item', {
              v-tooltip:hover="{ title: 'Remove flow', position: 'top' }">
           <i class="fas fa-trash-alt"></i>
         </div>
+        <div class="tree-item-panel-icon"
+             v-show="!model.root && !isFolder"
+             v-tooltip:hover="{ title: 'to dashboard', position: 'top' }">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
       </div>
     </div>
     <ul class="tree-directory"

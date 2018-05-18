@@ -7,7 +7,7 @@ Vue.component('admin', {
         <h1>NOETL</h1>
       </div>
       <div class="flow-header-panel">
-        <button class="noetl-button" v-on:click="openPopupNewProject()">new project</button>
+        <!--<button class="noetl-button" v-on:click="openPopupNewProject()">new project</button>-->
       </div>
     </div>
     <div class="noetl-container">
