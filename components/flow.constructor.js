@@ -216,12 +216,17 @@ Vue.component('flow-constructor', {
     }
 
     var startGraph = {
-      "job1": ["step1", "step2"],
-      "step1": ["step2"],
-      "step2": ["step3", "step4"],
-      "step3": ["step5"],
-      "step4": ["step5"],
-      "step5": []
+      "start": ["websvc101", "websvc201", "websvc301"],
+      "websvc101": ["websvc102"],
+      "websvc102": ["ssh501"],
+      "websvc201": ["jdbc202"],
+      "jdbc202": ["ssh501"],
+      "websvc301": ["shell302"],
+      "shell302": ["ssh501"],
+      "ssh501": ["scp601"],
+      "scp601": ["shell701"],
+      "shell701": ["jdbc801"],
+      "jdbc801": [""]
     };
     $('#adjacency-list').html(JSON.stringify(startGraph, null, 1));
 
