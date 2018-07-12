@@ -226,7 +226,7 @@ Vue.component('flow-constructor', {
       "ssh501": ["scp601"],
       "scp601": ["shell701"],
       "shell701": ["jdbc801"],
-      "jdbc801": [""]
+      "jdbc801": []
     };
     $('#adjacency-list').html(JSON.stringify(startGraph, null, 1));
 
