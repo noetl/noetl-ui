@@ -17,7 +17,7 @@ class FlowTabs extends React.Component {
 
   render() {
     return (
-      <div className="flow-tabs" ref={this.myRef}
+      <div className="flow-tabs noselect" ref={this.myRef}
            onWheel={this.scrollHorizontally}>
         <div className="flow-tab-wrapper">
           <div className="flow-tab">

@@ -8,10 +8,10 @@ export default ({ match }) => {
   return (
       <div className="admin-page">
         <div className="flow-header">
-          <div className="flow-title">
+          <div className="flow-title noselect">
             <h1>NOETL</h1>
           </div>
-          <div className="flow-header-panel">
+          <div className="flow-header-panel noselect">
             <div className="menu-group">
               <NavLink className="menu-item" activeClassName="router-link-active" to={`${match.url}/flows` }>flows</NavLink>
               <NavLink className="menu-item" activeClassName="router-link-active" to={`${match.url}/processes` }>processes</NavLink>
@@ -43,7 +43,7 @@ export default ({ match }) => {
           </div>
 
         </div>
-        <div className="flow-footer">
+        <div className="flow-footer noselect">
           <button className="button-logs">support</button>
           <button className="button-logs">contact us</button>
           <button className="button-logs">our team</button>

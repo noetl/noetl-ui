@@ -17,7 +17,7 @@ class ConfigTypeTabs extends React.Component {
 
   render() {
     return (
-      <div className="config-type-tabs" ref={this.myRef}
+      <div className="config-type-tabs noselect" ref={this.myRef}
            onWheel={this.scrollHorizontally}>
         <div className="flow-tab-wrapper">
           <div className="flow-tab">
