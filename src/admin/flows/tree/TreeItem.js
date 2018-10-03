@@ -48,54 +48,56 @@ class TreeItem extends React.Component {
     let {node, path} = this.props;
     return (
       <li>
-        <div className="item-header-container">
-          {this.isFolder() ?
-            <div className={"fas-tree-directory " + (node.isOpen ? "fa-folder-open" : "fa-folder")}
+        <div className="item-tree-container">
+          <div className="item-tree-header-container">
+            {this.isFolder() ?
+              <div className={"fas-tree-directory " + (node.isOpen ? "fa-folder-open" : "fa-folder")}
+                   onClick={this.toggle}>
+              </div>
+              : null}
+            {!this.isFolder() ?
+              <div className="fas-tree-directory fa-code-branch">
+              </div>
+              : null}
+            <div className={"fas-tree-directory " + (this.isFolder() ? "bold" : "")}
                  onClick={this.toggle}>
+              {node.name}
             </div>
-            : null}
-          {!this.isFolder() ?
-            <div className="fas-tree-directory fa-code-branch">
-            </div>
-            : null}
-          <div className={"fas-tree-directory " + (this.isFolder() ? "bold" : "")}
-               onClick={this.toggle}>
-            {node.name}
-          </div>
 
-          <div className="tree-item-panel">
-            {this.isFolder() ?
-              <div className="tree-item-panel-icon"
-                   data-tip data-for='newFlowTooltip'>
-                <i className="fas fa-code-branch"></i>
-              </div>
-              : null}
-            {this.isFolder() ?
-              <div className="tree-item-panel-icon"
-                   data-tip data-for='newFolderTooltip'>
-                <i className="fas fa-folder-open"></i>
-              </div>
-              : null}
-            {!node.root && this.isFolder() ?
-              <div className="tree-item-panel-icon"
-                   v-onclick="removeDirectory();"
-                   data-tip data-for='removeFolderRecursiveTooltip'>
-                <i className="fas fa-trash-alt"></i>
-              </div>
-              : null}
-            {!node.root && !this.isFolder() ?
-              <div className="tree-item-panel-icon"
-                   v-onclick="removeProject();"
-                   data-tip data-for='removeFlowTooltip'>
-                <i className="fas fa-trash-alt"></i>
-              </div>
-              : null}
-            {!node.root && !this.isFolder() ?
-              <div className="tree-item-panel-icon"
-                   data-tip data-for='toDashboardTooltip'>
-                <i className="fas fa-clipboard-check"></i>
-              </div>
-              : null}
+            <div className="tree-item-panel">
+              {this.isFolder() ?
+                <div className="tree-item-panel-icon"
+                     data-tip data-for='newFlowTooltip'>
+                  <i className="fas fa-code-branch"></i>
+                </div>
+                : null}
+              {this.isFolder() ?
+                <div className="tree-item-panel-icon"
+                     data-tip data-for='newFolderTooltip'>
+                  <i className="fas fa-folder-open"></i>
+                </div>
+                : null}
+              {!node.root && this.isFolder() ?
+                <div className="tree-item-panel-icon"
+                     v-onclick="removeDirectory();"
+                     data-tip data-for='removeFolderRecursiveTooltip'>
+                  <i className="fas fa-trash-alt"></i>
+                </div>
+                : null}
+              {!node.root && !this.isFolder() ?
+                <div className="tree-item-panel-icon"
+                     v-onclick="removeProject();"
+                     data-tip data-for='removeFlowTooltip'>
+                  <i className="fas fa-trash-alt"></i>
+                </div>
+                : null}
+              {!node.root && !this.isFolder() ?
+                <div className="tree-item-panel-icon"
+                     data-tip data-for='toDashboardTooltip'>
+                  <i className="fas fa-clipboard-check"></i>
+                </div>
+                : null}
+            </div>
           </div>
         </div>
         {node.isOpen && this.isFolder() ?

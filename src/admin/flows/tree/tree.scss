@@ -17,7 +17,6 @@
 
 .fas-tree-directory {
   position: relative;
-
 }
 
 .fas-tree-directory:before {
@@ -29,25 +28,30 @@
   color: #3dc9b0;
 }
 
-.item-header-container {
-  display: flex;
-}
-
-.item-header-container:hover .tree-item-panel {
-  display: flex;
-  padding-left: 5px;
-}
-
-.tree-item-panel {
-  display: none;
-}
-
-.tree-item-panel .tree-item-panel-icon {
-  margin-left: 5px;
-  margin-right: 5px;
-  color: white;
+.item-tree-container {
+  width: 2000px;
   &:hover {
-    color: #3dc9b0;
+    background-color: rgba(99, 99, 99, 0.2);
+    .tree-item-panel {
+      display: flex;
+      padding-left: 5px;
+    }
+  }
+}
+
+.item-tree-header-container {
+  display: flex;
+  flex-wrap: wrap;
+  .tree-item-panel {
+    display: none;
+    .tree-item-panel-icon {
+      margin-left: 5px;
+      margin-right: 5px;
+      color: white;
+      &:hover {
+        color: #3dc9b0;
+      }
+    }
   }
 }
 
