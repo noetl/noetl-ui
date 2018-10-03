@@ -1,0 +1,57 @@
+.processes-page {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  border-top: 1px solid #1E1E1E;
+  .processes {
+    width: 30%;
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid #404040;
+    .process {
+      width: 100%;
+      color: #9b9b9b;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      padding-left: 10px;
+      cursor: pointer;
+      border: 1px solid #2b2b2b;
+      border-top: 0;
+      &.active{
+        background-color: #2b2b2b;
+        color: #ce9178;
+        i{
+          color: #3dc9b0;
+        }
+      }
+      &:hover{
+        background-color: #2b2b2b;
+        color: #ce9178;
+        i{
+          color: #3dc9b0;
+        }
+      }
+      i {
+        margin-right: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+  .flow-checker{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      color: #4a4a4a;
+    }
+  }
+}

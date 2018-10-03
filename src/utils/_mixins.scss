@@ -1,0 +1,13 @@
+@mixin setIcon($icon, $width, $height) {
+  //width: unquote( $width );
+  //height: unquote( $height );
+  background-image: unquote( 'url(/assets/images/icons/png/' + $icon + ')' );
+
+}
+
+
+@mixin vLine($height){
+  width: 100%;
+  height: unquote( $height );
+  background: linear-gradient(to left,#edeeef 0,#a9aaaa 30%,#a9aaaa 70%,#edeeef 100%);
+}

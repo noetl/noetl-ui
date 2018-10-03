@@ -1,0 +1,51 @@
+.config-type-tabs {
+  width: 100%;
+  height: 32px;
+  overflow: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #2a2a2a;
+  &:hover{
+    &::-webkit-scrollbar {
+      height: 2px;
+    }
+  }
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background-color: #2a2a2a;
+  }
+
+  &::-webkit-scrollbar-thumb:horizontal {
+    background-color: #444444;
+  }
+  .flow-tab-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    .flow-tab {
+      position: relative;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: #c2c2c2;
+      cursor: pointer;
+      background-color: #2a2a2a;
+      height: 30px;
+      border-left: 1px solid #1E1E1E;
+      border-right: 1px solid #1E1E1E;
+      font-size: 12px;
+      &:hover{
+        background-color: #1E1E1E;
+        color: white;
+      }
+      &.active{
+        background-color: #1E1E1E;
+        color: white;
+      }
+    }
+
+  }
+}

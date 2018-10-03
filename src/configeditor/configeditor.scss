@@ -1,0 +1,44 @@
+.app-config-component {
+
+}
+
+.app-logo {
+  font-family: sans-serif;
+  color: #6fc232;
+  cursor: pointer;
+}
+
+.app-editor-button {
+  box-shadow: 0 2px 8px #000;
+  color: #fdfdfd;
+  background-color: #74797d;
+  border: 0;
+  font-size: 14px;
+  padding: 5px 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    background-color: #666b6f;
+  }
+}
+
+.app-config-component-header {
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #2b2b2b;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: sans-serif;
+  .flow-name {
+    margin-left: 15px;
+    color: white;
+  }
+  .diff {
+    margin-left: auto;
+  }
+  .save {
+    margin-left: 15px;
+  }
+}

@@ -1,0 +1,808 @@
+$columns: 12;
+
+$container: 1170px;
+$offset: 30px;
+
+$break_lg: 1450px;
+$container_lg: 970px;
+
+$break_md: 992px;
+$container_md: 970px;
+
+$break_sm: 720px;
+$container_sm: 970px;
+
+$break_xs: 576px;
+$container_xs: 970px;
+
+@mixin reset(){
+    body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,input,textarea,p,blockquote,th,td{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    table{
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    fieldset,img,abbr{
+        border: 0;
+    }
+    address,caption,cite,code,dfn,em,strong,th,var{
+        font-style: normal;
+        font-weight: normal;
+    }
+    ul li{
+        list-style: none;
+    }
+    caption,th{
+        text-align: left;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-size: 100%;
+        font-weight: normal;
+    }
+    sup{
+        vertical-align: text-top;
+    }
+    sub{
+        vertical-align: text-bottom;
+    }
+    input,textarea,select{
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+    }
+    legend{
+        color: #000;
+    }
+    article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,main{
+        display: block;
+    }
+}
+
+$atom: 100% / $columns;
+$offset_one_side: ($offset / 2);
+$smoothingErrorCalc: 0.00001;
+
+@mixin container($container){
+    max-width: $container;
+    margin: 0 auto;
+    padding-left: $offset_one_side;
+    padding-right: $offset_one_side;
+}
+
+@mixin wrapper(){
+    max-width: $container;
+    margin: 0 auto;
+    padding-left: $offset_one_side;
+    padding-right: $offset_one_side;
+    @media screen and (max-width: $break_lg){
+        max-width: $container_lg;
+    }
+
+    @media screen and (max-width: $break_md){
+        max-width: $container_md;
+    }
+
+    @media screen and (max-width: $break_sm){
+        max-width: $container_sm;
+    }
+
+    @media screen and (max-width: $break_xs){
+        max-width: $container_xs;
+    }
+}
+@mixin row-flex(){
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -$offset_one_side;
+    margin-right: -$offset_one_side;
+}
+@mixin row-float(){
+    position: relative;
+    margin-left: -$offset_one_side;
+    margin-right: -$offset_one_side;
+    @include clearfix();
+}
+@mixin column-flex(){
+    box-sizing: border-box;
+    margin-left: $offset_one_side;
+    margin-right: $offset_one_side;
+    word-wrap: break-word;
+}
+
+@mixin column-float(){
+    box-sizing: border-box;
+    margin-left: $offset_one_side;
+    margin-right: $offset_one_side;
+    float: left;
+}
+
+@mixin column-float-padding(){
+    box-sizing: border-box;
+    padding-left: $offset_one_side;
+    padding-right: $offset_one_side;
+    float: left;
+}
+
+@mixin column-flex-padding(){
+    box-sizing: border-box;
+    padding-left: $offset_one_side;
+    padding-right: $offset_one_side;
+    word-wrap: break-word;
+}
+
+@mixin col($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    width: #{calc(#{$value} - #{$offset})};
+}
+@mixin col-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    width: $value;
+}
+@mixin offset($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    margin-left: #{calc(#{$value} + #{$offset_one_side})};
+    margin-right: #{calc(#{$value} + #{$offset_one_side})};
+}
+@mixin offset-left($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    margin-left: #{calc(#{$value} + #{$offset_one_side})};
+}
+@mixin offset-right($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    margin-right: #{calc(#{$value} + #{$offset_one_side})};
+}
+
+@mixin offset-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    margin-left: $value;
+    margin-right: $value;
+}
+@mixin offset-left-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    margin-left: $value;
+}
+@mixin offset-right-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    margin-right: $value;
+}
+@mixin justify-content($value){
+    justify-content: $value;
+}
+@mixin align-items($value){
+    align-items: $value;
+}
+@mixin align-content($value){
+    align-content: $value;
+}
+@mixin align-self($value){
+    align-self: $value;
+}
+@mixin order($value){
+    order: $value;
+}
+@mixin flex($value){
+    flex: $value;
+}
+@mixin flex-grow($value){
+    flex-grow: $value;
+}
+@mixin flex-shrink($value){
+    flex-shrink: $value;
+}
+@mixin flex-basis($value){
+    flex-basis: $value;
+}
+@mixin flex-direction($value){
+    flex-direction: $value;
+}
+@mixin flex-wrap($value){
+    flex-wrap: $value;
+}
+@mixin flex-flow($value){
+    flex-flow: $value;
+}
+@mixin float($value){
+    float: $value;
+}
+
+@mixin col-lg($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_lg){
+        width: #{calc(#{$value} - #{$offset})};
+    }
+}
+
+@mixin col-lg-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_lg){
+        width: $value;
+    }
+}
+
+@mixin offset-lg($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_lg){
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-left-lg($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_lg){
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-right-lg($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_lg){
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-padding-lg($n){
+    @media screen and (max-width: $break_lg){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+        margin-right: $value;
+    }
+}
+@mixin offset-left-padding-lg($n){
+    @media screen and (max-width: $break_lg){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+    }
+}
+@mixin offset-right-padding-lg($n){
+    @media screen and (max-width: $break_lg){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-right: $value;
+    }
+}
+@mixin justify-content-lg($value){
+    @media screen and (max-width: $break_lg){
+        justify-content: $value;
+    }
+}
+@mixin align-items-lg($value){
+    @media screen and (max-width: $break_lg){
+        align-items: $value;
+    }
+}
+@mixin align-content-lg($value){
+    @media screen and (max-width: $break_lg){
+        align-content: $value;
+    }
+}
+@mixin align-self-lg($value){
+    @media screen and (max-width: $break_lg){
+        align-self: $value;
+    }
+}
+@mixin order-lg($value){
+    @media screen and (max-width: $break_lg){
+        order: $value;
+    }
+}
+@mixin flex-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex: $value;
+    }
+}
+@mixin flex-grow-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex-grow: $value;
+    }
+}
+@mixin flex-shrink-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex-shrink: $value;
+    }
+}
+@mixin flex-basis-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex-basis: $value;
+    }
+}
+@mixin flex-direction-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex-direction: $value;
+    }
+}
+@mixin flex-wrap-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex-wrap: $value;
+    }
+}
+@mixin flex-flow-lg($value){
+    @media screen and (max-width: $break_lg){
+        flex-flow: $value;
+    }
+}
+@mixin float-lg($value){
+    @media screen and (max-width: $break_lg){
+        float: $value;
+    }
+}
+
+@mixin lg() {
+    @media screen and (max-width: $break_lg) { @content; }
+}
+
+@mixin col-md($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_md){
+        width: #{calc(#{$value} - #{$offset})};
+    }
+}
+
+@mixin col-md-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_md){
+        width: $value;
+    }
+}
+
+@mixin offset-md($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_md){
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+
+@mixin offset-left-md($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_md){
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+
+@mixin offset-right-md($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_md){
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+
+@mixin offset-padding-md($n){
+    @media screen and (max-width: $break_md){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+        marging-right: $value;
+    }
+}
+
+@mixin offset-left-padding-md($n){
+    @media screen and (max-width: $break_md){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+    }
+}
+
+@mixin offset-right-padding-md($n){
+    @media screen and (max-width: $break_md){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-right: $value;
+    }
+}
+
+@mixin justify-content-md($value){
+    @media screen and (max-width: $break_md){
+        justify-content: $value;
+    }
+}
+
+@mixin align-items-md($value){
+    @media screen and (max-width: $break_md){
+        align-items: $value;
+    }
+}
+@mixin align-content-md($value){
+    @media screen and (max-width: $break_md){
+        align-content: $value;
+    }
+}
+@mixin align-self-md($value){
+    @media screen and (max-width: $break_md){
+        align-self: $value;
+    }
+}
+@mixin order-md($value){
+    @media screen and (max-width: $break_md){
+        order: $value;
+    }
+}
+@mixin flex-md($value){
+    @media screen and (max-width: $break_md){
+        flex: $value;
+    }
+}
+@mixin flex-grow-md($value){
+    @media screen and (max-width: $break_md){
+        flex-grow: $value;
+    }
+}
+@mixin flex-shrink-md($value){
+    @media screen and (max-width: $break_md){
+        flex-shrink: $value;
+    }
+}
+@mixin flex-basis-md($value){
+    @media screen and (max-width: $break_md){
+        flex-basis: $value;
+    }
+}
+@mixin flex-direction-md($value){
+    @media screen and (max-width: $break_md){
+        flex-direction: $value;
+    }
+}
+@mixin flex-wrap-md($value){
+    @media screen and (max-width: $break_md){
+        flex-wrap: $value;
+    }
+}
+@mixin flex-flow-md($value){
+    @media screen and (max-width: $break_md){
+        flex-flow: $value;
+    }
+}
+@mixin float-md($value){
+    @media screen and (max-width: $break_md){
+        float: $value;
+    }
+}
+
+@mixin md() {
+    @media screen and (max-width: $break_md) { @content; }
+}
+
+@mixin col-sm($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_sm){
+        width: #{calc(#{$value} - #{$offset})};
+    }
+}
+
+@mixin col-sm-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_sm){
+        width: $value;
+    }
+}
+
+@mixin offset-sm($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_sm){
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-left-sm($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_sm){
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-right-sm($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_sm){
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-padding-sm($n){
+    @media screen and (max-width: $break_sm){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+        margin-right: $value;
+    }
+}
+@mixin offset-left-padding-sm($n){
+    @media screen and (max-width: $break_sm){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+    }
+}
+@mixin offset-right-padding-sm($n){
+    @media screen and (max-width: $break_sm){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-right: $value;
+    }
+}
+@mixin justify-content-sm($value){
+    @media screen and (max-width: $break_sm){
+        justify-content: $value;
+    }
+}
+@mixin align-items-sm($value){
+    @media screen and (max-width: $break_sm){
+        align-items: $value;
+    }
+}
+@mixin align-content-sm($value){
+    @media screen and (max-width: $break_sm){
+        align-content: $value;
+    }
+}
+@mixin align-self-sm($value){
+    @media screen and (max-width: $break_sm){
+        align-self: $value;
+    }
+}
+@mixin order-sm($value){
+    @media screen and (max-width: $break_sm){
+        order: $value;
+    }
+}
+@mixin flex-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex: $value;
+    }
+}
+@mixin flex-grow-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex-grow: $value;
+    }
+}
+@mixin flex-shrink-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex-shrink: $value;
+    }
+}
+@mixin flex-basis-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex-basis: $value;
+    }
+}
+@mixin flex-direction-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex-direction: $value;
+    }
+}
+@mixin flex-wrap-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex-wrap: $value;
+    }
+}
+@mixin flex-flow-sm($value){
+    @media screen and (max-width: $break_sm){
+        flex-flow: $value;
+    }
+}
+@mixin float-sm($value){
+    @media screen and (max-width: $break_sm){
+        float: $value;
+    }
+}
+
+@mixin sm() {
+    @media screen and (max-width: $break_sm) { @content; }
+}
+
+@mixin col-xs($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_xs){
+        width: #{calc(#{$value} - #{$offset})};
+    }
+}
+
+@mixin col-xs-padding($n){
+    $value: $atom * $n + $smoothingErrorCalc;
+    @media screen and (max-width: $break_xs){
+        width: $value;
+    }
+}
+
+@mixin offset-xs($n){
+    @media screen and (max-width: $break_xs){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-left-xs($n){
+    @media screen and (max-width: $break_xs){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-right-xs($n){
+    @media screen and (max-width: $break_xs){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-right: #{calc(#{$value} + #{$offset_one_side})};
+    }
+}
+@mixin offset-padding-xs($n){
+    @media screen and (max-width: $break_xs){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+        margin-right: $value;
+    }
+}
+@mixin offset-left-padding-xs($n){
+    @media screen and (max-width: $break_xs){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-left: $value;
+    }
+}
+@mixin offset-right-padding-xs($n){
+    @media screen and (max-width: $break_xs){
+        $value: $atom * $n + $smoothingErrorCalc;
+        margin-right: $value;
+    }
+}
+@mixin justify-content-xs($value){
+    @media screen and (max-width: $break_xs){
+        justify-content: $value;
+    }
+}
+@mixin align-items-xs($value){
+    @media screen and (max-width: $break_xs){
+        align-items: $value;
+    }
+}
+@mixin align-content-xs($value){
+    @media screen and (max-width: $break_xs){
+        align-content: $value;
+    }
+}
+@mixin align-self-xs($value){
+    @media screen and (max-width: $break_xs){
+        align-self: $value;
+    }
+}
+@mixin order-xs($value){
+    @media screen and (max-width: $break_xs){
+        order: $value;
+    }
+}
+@mixin flex-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex: $value;
+    }
+}
+@mixin flex-grow-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex-grow: $value;
+    }
+}
+@mixin flex-shrink-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex-shrink: $value;
+    }
+}
+@mixin flex-basis-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex-basis: $value;
+    }
+}
+@mixin flex-direction-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex-direction: $value;
+    }
+}
+@mixin flex-wrap-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex-wrap: $value;
+    }
+}
+@mixin flex-flow-xs($value){
+    @media screen and (max-width: $break_xs){
+        flex-flow: $value;
+    }
+}
+@mixin float-xs($value){
+    @media screen and (max-width: $break_xs){
+        float: $value;
+    }
+}
+
+@mixin xs() {
+    @media screen and (max-width: $break_xs) { @content; }
+}
+
+@mixin debug($background, $outline){
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    
+    > div{
+        height: inherit;
+        @include wrapper();
+        
+        > div{
+            height: inherit;
+            @include row-flex();
+            
+            > div{
+                @include column-flex();
+                @include col(1);
+                height: inherit;
+                outline: $outline;
+                background: $background;
+            }
+        }
+    }
+}
+
+@mixin clearfix(){
+    &::after{
+        display: block;
+        content: "";
+        clear: both;
+    }
+}
+
+@mixin screen($maxWidth) {
+  @media screen and (max-width: $maxWidth) { @content; }
+}
+
+@mixin screen-min($minWidth) {
+  @media screen and (min-width: $minWidth) { @content; }
+}
+
+@mixin screen-full($minWidth, $maxWidth) {
+  @media screen and (min-width: $minWidth) and (max-width: $maxWidth) { @content; }
+}
+
+@mixin screen-height($maxHeight) {
+    @media screen and (max-height: $maxHeight) { @content; }
+}
+
+@mixin screen-min-height($minHeight) {
+    @media screen and (min-height: $minHeight) { @content; }
+}
+
+@mixin screen-full-height($minHeight, $maxHeight) {
+    @media screen and (min-height: $minHeight) and (max-height: $maxHeight) { @content; }
+}
+
+// test functional
+// суть этих миксинов в том что на определеном экране может понадобится уменьшить элементы в размерах
+// пример: элементы по 5 колонок надо сделать по 2 в ряд
+// col-float-md(5) ignore-col-md(2) у элементов с права и слева будет отступ в одну колонку
+// аналог justify-content(center) который задается в рове
+// игнор надо вызывать каждой колонке в ряде и применяется только для флексбоксовой сетки
+// данный функционал в стадии тестирования
+// работает только если в row сумарно только $columns колонок
+
+
+@mixin ignore-col($n){
+    $value: $atom * $n  * 0.5;
+    position: relative;
+    left: $value;
+}
+
+@mixin ignore-col-lg($n){
+    $value: $atom * $n  * 0.5;
+    @media screen and (min-width: $break_md) and (max-width: $break_lg){
+        position: relative;
+        left: $value;
+    }
+}
+
+@mixin ignore-col-md($n){
+    $value: $atom * $n  * 0.5;
+    @media screen and (min-width: $break_sm) and (max-width: $break_md){
+        position: relative;
+        left: $value;
+    }
+}
+
+@mixin ignore-col-sm($n){
+    $value: $atom * $n  * 0.5;
+    @media screen and (min-width: $break_sm) and (max-width: $break_md){
+        position: relative;
+        left: $value;
+    }
+}
+
+@mixin ignore-col-xs($n){
+    $value: $atom * $n  * 0.5;
+    @media screen and (max-width: $break_xs){
+        position: relative;
+        left: $value;
+    }
+}
