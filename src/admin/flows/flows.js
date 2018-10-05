@@ -53,16 +53,16 @@ class Flows extends React.Component {
     }
   }
 
-  updateDimensions() {
+  updateDimensions = () => {
     this.editor.layout();
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener("resize", this.updateDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   onChange = (newValue, e) => {
@@ -72,7 +72,6 @@ class Flows extends React.Component {
   editorDidMount = (editor, monaco) => {
     // eslint-disable-next-line no-console
     //console.log('editorDidMount', editor, editor.getValue(), editor.getModel());
-    console.log('editorDidMount', monaco);
     this.editor = editor;
   }
 

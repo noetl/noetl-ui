@@ -1,0 +1,41 @@
+.app-popup {
+  background-color: #292929;
+  width: 100%;
+  max-width: 300px;
+  min-height: 100px;
+  margin: auto;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #4c4c4c;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  .close {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 30px;
+    font-size: 20px;
+    color: #bfbfbf;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.1s;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+  h3{
+    text-align: left;
+    color: #bfbfbf;
+    margin: 0;
+    font-size: 14px;
+    padding: 5px 0 0 10px;
+    padding-top: 7px;
+  }
+  .popup-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+

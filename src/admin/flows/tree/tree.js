@@ -1,8 +1,10 @@
 import React from "react";
 import TreeItem from "./TreeItem";
 import './tree.scss';
+import CreateProjectPopup from "./create-project-popup/CreateProjectPopup";
 class Tree extends React.Component {
   state = {
+    isOpenCreateNewProjectPopup: false,
     model: {
       "name": "root",
       "root": true,
@@ -42,14 +44,24 @@ class Tree extends React.Component {
     });
   }
 
+  closeCreateNewProjectPopup = ()=>{
+    this.setState({isOpenCreateNewProjectPopup: false});
+  }
+
+  onCreateProjectEvent = () => {
+    this.setState({isOpenCreateNewProjectPopup: true});
+  }
+
   render() {
     return (
       <ul className="tree-directory tree-directory-root">
         <TreeItem className="item-tree"
                   onToggle={this.onToggle}
+                  onCreateProjectEvent={this.onCreateProjectEvent}
                   node={this.state.model}
                   path={this.state.model.name}>
         </TreeItem>
+        {this.state.isOpenCreateNewProjectPopup?<CreateProjectPopup onClose={this.closeCreateNewProjectPopup}/>:null}
       </ul>
     );
   }

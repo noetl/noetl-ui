@@ -23,11 +23,20 @@ class TreeItem extends React.Component {
     }
   }
 
+  createProjectEvent = () => {
+    const {node, onCreateProjectEvent} = this.props;
+
+    if (onCreateProjectEvent) {
+      onCreateProjectEvent(node, this.props.path);
+    }
+  }
+
   _eventBubbles() {
-    const {onToggle} = this.props;
+    const {onToggle, onCreateProjectEvent} = this.props;
 
     return {
-      onToggle
+      onToggle,
+      onCreateProjectEvent
     };
   }
 
@@ -67,7 +76,7 @@ class TreeItem extends React.Component {
             <div className="tree-item-panel">
               {this.isFolder() ?
                 <div className="tree-item-panel-icon"
-                     data-tip data-for='newFlowTooltip'>
+                     data-tip data-for='newFlowTooltip' onClick={this.createProjectEvent}>
                   <i className="fas fa-code-branch"></i>
                 </div>
                 : null}

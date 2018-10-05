@@ -52,16 +52,16 @@ export default class CodeEditor extends React.Component {
     }
   }
 
-  updateDimensions() {
+  updateDimensions = () => {
     this.editor.layout();
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener("resize", this.updateDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   onChange = (newValue, e) => {
