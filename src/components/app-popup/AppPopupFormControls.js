@@ -12,23 +12,55 @@ export const AppPopupFormControl = (props) => (
 )
 
 /**
- * @param props:
+ * props:
  * description: 'string'
+ * focused: 'bool'
  */
-export const AppPopupFormInput = (props) => (
-  <div className="app-popup-form-input app-popup-form-controls">
-    <span className="noselect description">{props.description}: </span>
-    <input {...props}/>
-  </div>
-)
+export class AppPopupFormInput extends React.Component{
+  componentDidMount(){
+    const {isFocused = false} = this.props;
+    if(isFocused) {
+      setTimeout(()=>{
+        this.nameInput.focus();
+      });
+    }
+  }
+  render() {
+    const props = {...this.props};
+    delete props.isFocused;
+    return(
+      <div className="app-popup-form-input app-popup-form-controls">
+        <span className="noselect description">{props.description}: </span>
+        <input ref={(input) => { this.nameInput = input; }}
+          {...props}/>
+      </div>
+    );
+  }
+}
 
 /**
- * @param props:
+ * props:
  * description: 'string'
+ * focused: 'bool'
  */
-export const AppPopupFormTextarea = (props) => (
-  <div className="app-popup-form-input app-popup-form-controls">
-    <span className="noselect description">{props.description}: </span>
-    <textarea {...props}/>
-  </div>
-)
+export class AppPopupFormTextarea extends React.Component{
+  componentDidMount(){
+    const {isFocused = false} = this.props;
+    if(isFocused) {
+      setTimeout(()=>{
+        this.nameInput.focus();
+      });
+    }
+  }
+  render() {
+    const props = {...this.props};
+    delete props.isFocused;
+    return(
+      <div className="app-popup-form-input app-popup-form-controls">
+        <span className="noselect description">{props.description}: </span>
+        <textarea ref={(input) => { this.nameInput = input; }}
+               {...props}/>
+      </div>
+    );
+  }
+}

@@ -46,6 +46,7 @@ class CreateProjectPopup extends React.Component {
               description="name"
               name="title"
               type="text"
+              isFocused={true}
               value={this.state.title}
               onChange={this.handleInputChange}/>
             <AppPopupFormTextarea

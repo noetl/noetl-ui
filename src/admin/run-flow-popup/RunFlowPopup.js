@@ -85,6 +85,7 @@ class RunFlowPopup extends React.Component {
               description="process name"
               name="title"
               type="text"
+              isFocused={true}
               value={this.state.title}
               onChange={this.handleInputChange}/>
             <AppPopupFormControl description="context">

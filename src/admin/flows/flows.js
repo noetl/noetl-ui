@@ -174,7 +174,7 @@ class Flows extends React.Component {
             value={code}
             theme="vs-dark"
             options={options}
-            onChange={this.onChange}
+            // onChange={this.onChange}
             editorDidMount={this.editorDidMount}
           />
           <ConfigTypeTabs/>
