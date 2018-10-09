@@ -101,8 +101,8 @@ class TreeItem extends React.Component {
                 : null}
               {!node.root && !this.isFolder() ?
                 <div className="tree-item-panel-icon"
-                     data-tip="Open flow">
-                  <i className="fas fa-clipboard-check"></i>
+                     data-tip="Open flow for edit">
+                  <i className="far fa-edit"></i>
                 </div>
                 : null}
             </div>
