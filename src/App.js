@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-import './App.scss';
 import CodeEditor from "./configeditor/ConfigEditor"
 import {Redirect, Route, Switch} from "react-router-dom";
 import Admin from "./admin/admin";
-
+import './App.scss';
+import './components/tooltip/tooltip.scss';
 class App extends Component {
   render() {
     return (

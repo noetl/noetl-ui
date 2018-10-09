@@ -1,0 +1,52 @@
+$tooltipTextColor: #bfbfbf;
+$tooltipBorderColor: #676767;
+$tooltipBgColor: #424242;
+
+.__react_component_tooltip {
+  z-index: 99999;
+  padding: 5px 15px;
+  //visibility: visible;
+  //opacity: 1;
+  &.show {
+    opacity: 1;
+  }
+  &.type-dark {
+    color: $tooltipTextColor;
+    background-color: $tooltipBgColor;
+    &.border {
+      border: 1px solid $tooltipBorderColor;
+      &.place-top:before {
+        border-top: 8px solid $tooltipBorderColor;
+      }
+      &.place-bottom:before {
+        border-bottom: 8px solid $tooltipBorderColor;
+      }
+      &.place-left:before {
+        border-left: 8px solid $tooltipBorderColor;
+      }
+      &.place-right:before {
+        border-right: 8px solid $tooltipBorderColor;
+      }
+    }
+    &.place-top:after {
+      border-top-color: $tooltipBgColor;
+      border-top-style: solid;
+      border-top-width: 6px;
+    }
+    &.place-bottom:after {
+      border-bottom-color: $tooltipBgColor;
+      border-bottom-style: solid;
+      border-bottom-width: 6px;
+    }
+    &.place-left:after {
+      border-left-color: $tooltipBgColor;
+      border-left-style: solid;
+      border-left-width: 6px;
+    }
+    &.place-right:after {
+      border-right-color: $tooltipBgColor;
+      border-right-style: solid;
+      border-right-width: 6px;
+    }
+  }
+}

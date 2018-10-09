@@ -2,7 +2,6 @@ import React from "react";
 import {NavLink, Redirect, Route, Switch} from "react-router-dom";
 import './admin.scss'
 import Processes from "./processes/processes";
-import ReactTooltip from "react-tooltip";
 import Flows from "./flows/flows";
 import RunFlowPopup from "./run-flow-popup/RunFlowPopup";
 class Admin extends React.Component {
@@ -43,7 +42,7 @@ class Admin extends React.Component {
             </div>
             <div className="flow-header-panel-buttons">
               <button className="flow-header-panel-buttons run"
-                      data-tip data-for='runFlowButtonTooltip'
+                      data-tip="RUN flow2" data-place="bottom"
               onClick={this.onClickButtonRun}>
                 <i className="fas fa-caret-right"></i>
               </button>
@@ -51,9 +50,6 @@ class Admin extends React.Component {
               <button className="flow-header-panel-buttons help">
                 ?
               </button>
-              <ReactTooltip id='runFlowButtonTooltip' type='light' effect='solid'>
-                <span>RUN flow2</span>
-              </ReactTooltip>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ class Tree extends React.Component {
           "isOpen": true,
           "children": [
             {"name": "fewqfewq"},
-            {"name": "fewqfewfqewqaaaaaaaaaaaaaaaaaaaafewqfewfqewqaaaaaaaaaaaaaaaaaaaafewqfewfqewqaaaaaaaaaaaaaaaaaaaafewqfewfqewqaaaaaaaaaaaaaaaaaaaafewqfewfqewqaaaaaaaaaaaaaaaaaaaa"},
+            {"name": "fewqfewfqew"},
             {"name": "dsaDSA"}
           ]
         },

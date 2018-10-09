@@ -1,5 +1,4 @@
 import React from "react";
-import ReactTooltip from 'react-tooltip';
 
 class TreeItem extends React.Component {
   state = {}
@@ -76,33 +75,33 @@ class TreeItem extends React.Component {
             <div className="tree-item-panel">
               {this.isFolder() ?
                 <div className="tree-item-panel-icon"
-                     data-tip data-for='newFlowTooltip' onClick={this.createProjectEvent}>
+                     data-tip="New flow" onClick={this.createProjectEvent}>
                   <i className="fas fa-code-branch"></i>
                 </div>
                 : null}
               {this.isFolder() ?
                 <div className="tree-item-panel-icon"
-                     data-tip data-for='newFolderTooltip'>
+                     data-tip="New folder">
                   <i className="fas fa-folder-open"></i>
                 </div>
                 : null}
               {!node.root && this.isFolder() ?
                 <div className="tree-item-panel-icon"
                      v-onclick="removeDirectory();"
-                     data-tip data-for='removeFolderRecursiveTooltip'>
+                     data-tip="Remove folder recursive">
                   <i className="fas fa-trash-alt"></i>
                 </div>
                 : null}
               {!node.root && !this.isFolder() ?
                 <div className="tree-item-panel-icon"
                      v-onclick="removeProject();"
-                     data-tip data-for='removeFlowTooltip'>
+                     data-tip="Remove flow">
                   <i className="fas fa-trash-alt"></i>
                 </div>
                 : null}
               {!node.root && !this.isFolder() ?
                 <div className="tree-item-panel-icon"
-                     data-tip data-for='toDashboardTooltip'>
+                     data-tip="Open flow">
                   <i className="fas fa-clipboard-check"></i>
                 </div>
                 : null}
@@ -126,25 +125,6 @@ class TreeItem extends React.Component {
             }
           </ul>
           : null}
-        <ReactTooltip id='newFolderTooltip' type='light' effect='solid'>
-          <span>New folder</span>
-        </ReactTooltip>
-
-        <ReactTooltip id='removeFolderRecursiveTooltip' type='light' effect='solid'>
-          <span>Remove folder recursive</span>
-        </ReactTooltip>
-
-        <ReactTooltip id='removeFlowTooltip' type='light' effect='solid'>
-          <span>Remove flow</span>
-        </ReactTooltip>
-
-        <ReactTooltip id='toDashboardTooltip' type='light' effect='solid'>
-          <span>to dashboard</span>
-        </ReactTooltip>
-
-        <ReactTooltip id='newFlowTooltip' type='light' effect='solid'>
-          <span>New flow</span>
-        </ReactTooltip>
       </li>
     );
   }
