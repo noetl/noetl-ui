@@ -30,12 +30,39 @@ class TreeItem extends React.Component {
     }
   }
 
+  createDirectoryEvent = () => {
+    const {node, onCreateDirectoryEvent} = this.props;
+
+    if (onCreateDirectoryEvent) {
+      onCreateDirectoryEvent(node, this.props.path);
+    }
+  }
+
+  removeDirectoryEvent = () => {
+    const {node, onRemoveDirectoryEvent} = this.props;
+
+    if (onRemoveDirectoryEvent) {
+      onRemoveDirectoryEvent(node, this.props.path);
+    }
+  }
+
+  removeFlowEvent = () => {
+    const {node, onRemoveFlowEvent} = this.props;
+
+    if (onRemoveFlowEvent) {
+      onRemoveFlowEvent(node, this.props.path);
+    }
+  }
+
   _eventBubbles() {
-    const {onToggle, onCreateProjectEvent} = this.props;
+    const {onToggle, onCreateProjectEvent, onCreateDirectoryEvent, onRemoveDirectoryEvent, onRemoveFlowEvent} = this.props;
 
     return {
       onToggle,
-      onCreateProjectEvent
+      onCreateProjectEvent,
+      onCreateDirectoryEvent,
+      onRemoveDirectoryEvent,
+      onRemoveFlowEvent
     };
   }
 
@@ -80,20 +107,20 @@ class TreeItem extends React.Component {
                 </div>
                 : null}
               {this.isFolder() ?
-                <div className="tree-item-panel-icon"
+                <div className="tree-item-panel-icon" onClick={this.createDirectoryEvent}
                      data-tip="New folder">
                   <i className="fas fa-folder-open"></i>
                 </div>
                 : null}
               {!node.root && this.isFolder() ?
-                <div className="tree-item-panel-icon"
+                <div className="tree-item-panel-icon" onClick={this.removeDirectoryEvent}
                      v-onclick="removeDirectory();"
                      data-tip="Remove folder recursive">
                   <i className="fas fa-trash-alt"></i>
                 </div>
                 : null}
               {!node.root && !this.isFolder() ?
-                <div className="tree-item-panel-icon"
+                <div className="tree-item-panel-icon" onClick={this.removeFlowEvent}
                      v-onclick="removeProject();"
                      data-tip="Remove flow">
                   <i className="fas fa-trash-alt"></i>

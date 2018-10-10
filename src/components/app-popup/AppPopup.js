@@ -24,7 +24,7 @@ class AppPopup extends React.Component {
     const {
       maxWidth = '300px',
       minHeight = '100px',
-      title = 'please add prop title.',
+      title = '',
       onClose = this.defaultFunction,
       children
     } = this.props;
