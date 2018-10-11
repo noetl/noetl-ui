@@ -53,7 +53,7 @@ class Tree extends React.Component {
     }
   }
 
-  onToggle = (node, toggled, path) => {
+  onToggle = (toggled, path) => {
     this.setState(function (state, props) {
       return {...state, model: setOpenDirectory(state.model, path, toggled)};
     });

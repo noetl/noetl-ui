@@ -44,6 +44,7 @@ class CreateProjectPopup extends React.Component {
         <div className="app-popup-create-project">
           <div className="app-popup-form-component">
             <AppPopupFormInput
+              autocomplete="off"
               description="name"
               name="name"
               type="text"
