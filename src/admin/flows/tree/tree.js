@@ -4,23 +4,36 @@ import './tree.scss';
 import CreateProjectPopup from "./create-project-popup/CreateProjectPopup";
 import CreateDirectoryPopup from "./create-directory-popup/CreateDirectoryPopup";
 import QuestionPopup from "../../../components/question-popup/QuestionPopup";
+import {createDirectory, createItem, removeObjectTree, setOpenDirectory} from "./treeDataHendle";
 
 class Tree extends React.Component {
   state = {
-    isOpenCreateNewProjectPopup: false,
-    isOpenCreateNewDirectoryPopup: false,
-    isOpenRemoveFlowQuestionPopup: false,
-    isOpenRemoveDirectoryQuestionPopup: false,
+    createNewProjectPopup: {
+      isOpen: false,
+      path: ''
+    },
+    createNewDirectoryPopup: {
+      isOpen: false,
+      path: ''
+    },
+    removeFlowQuestionPopup: {
+      isOpen: false,
+      path: ''
+    },
+    removeDirectoryQuestionPopup: {
+      isOpen: false,
+      path: ''
+    },
     model: {
       "name": "root",
       "root": true,
       "isOpen": true,
       "children": [
         {
-          "name": "fewqfew"
+          "name": "flow1"
         },
         {
-          "name": "fewqfeqwf",
+          "name": "directory1",
           "isOpen": true,
           "children": [
             {"name": "fewqfewq"},
@@ -29,7 +42,7 @@ class Tree extends React.Component {
           ]
         },
         {
-          "name": "fewqfewqfe",
+          "name": "directory2",
           "isOpen": true,
           "children": [
             {"name": "dsa"},
@@ -41,56 +54,92 @@ class Tree extends React.Component {
   }
 
   onToggle = (node, toggled, path) => {
-    if (node.children) {
-      node.isOpen = toggled;
-    }
-    //this.forceUpdate();
     this.setState(function (state, props) {
-      return {...state}
+      return {...state, model: setOpenDirectory(state.model, path, toggled)};
     });
   }
-// new project
+
+  // new project
   closeCreateNewProjectPopup = () => {
-    this.setState({isOpenCreateNewProjectPopup: false});
+    this.setState({createNewProjectPopup: {isOpen: false}});
   }
 
-  onCreateProjectEvent = () => {
-    this.setState({isOpenCreateNewProjectPopup: true});
+  onCreateProjectEvent = (path) => {
+    console.log('onCreateProjectEvent');
+    console.log(path);
+    this.setState({createNewProjectPopup: {isOpen: true, path}});
+  }
+
+  onAcceptCreateProjectPopup = (value) => {
+    this.setState(function (state, props) {
+      return {
+        ...state,
+        createNewProjectPopup: {isOpen: false, path: ''},
+        model: createItem(state.model, state.createNewProjectPopup.path, value.name)
+      };
+    });
   }
 
   // new dir
   closeCreateNewDirectoryPopup = () => {
-    this.setState({isOpenCreateNewDirectoryPopup: false});
+    this.setState({createNewDirectoryPopup: {isOpen: false}});
   }
 
-  onCreateDirectoryEvent = () => {
-    this.setState({isOpenCreateNewDirectoryPopup: true});
+  onCreateDirectoryEvent = (path) => {
+    console.log('onCreateDirectoryEvent');
+    console.log(path);
+    this.setState({createNewDirectoryPopup: {isOpen: true, path}});
+  }
+
+  onAcceptCreateDirectoryPopup = (value) => {
+    this.setState(function (state, props) {
+      return {
+        ...state,
+        createNewDirectoryPopup: {isOpen: false, path: ''},
+        model: createDirectory(state.model, state.createNewDirectoryPopup.path, value.name)
+      };
+    });
   }
 
   // remove dir
   onRemoveDirectoryEvent = (path) => {
-    this.setState({isOpenRemoveDirectoryQuestionPopup: true});
+    console.log('onRemoveDirectoryEvent');
+    console.log(path);
+    this.setState({removeDirectoryQuestionPopup: {isOpen: true, path}});
   }
+
   onAcceptRemoveDirectory = () => {
-    //
-    this.closeRemoveDirectoryPopup();
+    this.setState(function (state, props) {
+      return {
+        ...state,
+        removeDirectoryQuestionPopup: {isOpen: false, path: ''},
+        model: removeObjectTree(state.model, state.removeDirectoryQuestionPopup.path)
+      };
+    });
   }
 
   closeRemoveDirectoryPopup = () => {
-    this.setState({isOpenRemoveDirectoryQuestionPopup: false});
+    this.setState({removeDirectoryQuestionPopup: {isOpen: false}});
   }
 
   // remove flow
   onRemoveFlowEvent = (path) => {
-    this.setState({isOpenRemoveFlowQuestionPopup: true});
+    console.log('onRemoveFlowEvent');
+    console.log(path);
+    this.setState({removeFlowQuestionPopup: {isOpen: true, path}});
   }
   onAcceptRemoveFlow = () => {
-    //
-    this.closeRemoveDirectoryPopup();
+    this.setState(function (state, props) {
+      return {
+        ...state,
+        removeFlowQuestionPopup: {isOpen: false, path: ''},
+        model: removeObjectTree(state.model, state.removeFlowQuestionPopup.path)
+      };
+    });
   }
 
   closeRemoveFlowPopup = () => {
-    this.setState({isOpenRemoveFlowQuestionPopup: false});
+    this.setState({removeFlowQuestionPopup: {isOpen: false}});
   }
 
   render() {
@@ -105,19 +154,23 @@ class Tree extends React.Component {
                   node={this.state.model}
                   path={this.state.model.name}>
         </TreeItem>
-        {this.state.isOpenCreateNewProjectPopup ?
-          <CreateProjectPopup onClose={this.closeCreateNewProjectPopup}/> : null}
-        {this.state.isOpenCreateNewDirectoryPopup ?
-          <CreateDirectoryPopup onClose={this.closeCreateNewDirectoryPopup}/> : null}
-        {this.state.isOpenRemoveDirectoryQuestionPopup ?
+        {this.state.createNewProjectPopup.isOpen ?
+          <CreateProjectPopup onClose={this.closeCreateNewProjectPopup}
+                              onAccept={this.onAcceptCreateProjectPopup}/> : null}
+        {this.state.createNewDirectoryPopup.isOpen ?
+          <CreateDirectoryPopup onClose={this.closeCreateNewDirectoryPopup}
+                                onAccept={this.onAcceptCreateDirectoryPopup}/> : null}
+        {this.state.removeDirectoryQuestionPopup.isOpen ?
           <QuestionPopup onAccept={this.onAcceptRemoveDirectory}
                          onCancel={this.closeRemoveDirectoryPopup}>
-            <span>Вы действительно хотите удалить эту директорию?</span>
+            <span>Вы действительно хотите удалить эту директорию?
+              &nbsp;<strong>{this.state.removeDirectoryQuestionPopup.path}</strong></span>
           </QuestionPopup> : null}
-        {this.state.isOpenRemoveFlowQuestionPopup ?
+        {this.state.removeFlowQuestionPopup.isOpen ?
           <QuestionPopup onAccept={this.onAcceptRemoveFlow}
                          onCancel={this.closeRemoveFlowPopup}>
-            <span>Вы действительно хотите удалить это проэкт?</span>
+            <span>Вы действительно хотите удалить это проэкт?
+              &nbsp;<strong>{this.state.removeFlowQuestionPopup.path}</strong></span>
           </QuestionPopup> : null}
       </ul>
     );

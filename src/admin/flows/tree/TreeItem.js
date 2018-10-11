@@ -17,46 +17,51 @@ class TreeItem extends React.Component {
       const {isOpen} = node;
 
       if (onToggle) {
-        onToggle(node, !isOpen, this.props.path);
+        onToggle(!isOpen, this.props.path);
       }
     }
   }
 
   createProjectEvent = () => {
-    const {node, onCreateProjectEvent} = this.props;
+    const {onCreateProjectEvent} = this.props;
 
     if (onCreateProjectEvent) {
-      onCreateProjectEvent(node, this.props.path);
+      onCreateProjectEvent(this.props.path);
     }
   }
 
   createDirectoryEvent = () => {
-    const {node, onCreateDirectoryEvent} = this.props;
+    const {onCreateDirectoryEvent} = this.props;
 
     if (onCreateDirectoryEvent) {
-      onCreateDirectoryEvent(node, this.props.path);
+      onCreateDirectoryEvent(this.props.path);
     }
   }
 
   removeDirectoryEvent = () => {
-    const {node, onRemoveDirectoryEvent} = this.props;
+    const {onRemoveDirectoryEvent} = this.props;
 
     if (onRemoveDirectoryEvent) {
-      onRemoveDirectoryEvent(node, this.props.path);
+      onRemoveDirectoryEvent(this.props.path);
     }
   }
 
   removeFlowEvent = () => {
-    const {node, onRemoveFlowEvent} = this.props;
+    const {onRemoveFlowEvent} = this.props;
 
     if (onRemoveFlowEvent) {
-      onRemoveFlowEvent(node, this.props.path);
+      onRemoveFlowEvent(this.props.path);
     }
   }
 
   _eventBubbles() {
-    const {onToggle, onCreateProjectEvent, onCreateDirectoryEvent, onRemoveDirectoryEvent, onRemoveFlowEvent} = this.props;
-
+    const {
+      onToggle,
+      onCreateProjectEvent,
+      onCreateDirectoryEvent,
+      onRemoveDirectoryEvent,
+      onRemoveFlowEvent
+    } = this.props;
     return {
       onToggle,
       onCreateProjectEvent,
@@ -139,6 +144,7 @@ class TreeItem extends React.Component {
           <ul className="tree-directory">
             {
               this.sortByDirectories(node.children).map((node) => {
+
                 return (
                   <TreeItem
                     className="item-tree"

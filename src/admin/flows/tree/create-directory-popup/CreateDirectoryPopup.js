@@ -3,6 +3,7 @@ import './CreateDirectoryPopup.scss';
 import AppPopup from "../../../../components/app-popup/AppPopup";
 import {AppPopupFormInput} from "../../../../components/app-popup/AppPopupFormControls";
 import {handleInputChange} from "../../../../utils/hendleInputChange";
+
 /**
  * props:
  * onClose: ()=>{}
@@ -12,11 +13,21 @@ class CreateDirectoryPopup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dirName: ''
+      name: ''
     };
     this.defaultFunction = () => {
     };
-    this.handleInputChange = handleInputChange(this.setState);
+    this.handleInputChange = handleInputChange(this.setState.bind(this));
+  }
+
+  onSubmit = () => {
+    const {
+      onAccept = this.defaultFunction
+    } = this.props;
+
+    if (this.state.name !== '') {
+      onAccept(this.state);
+    }
   }
 
   componentDidMount() {
@@ -25,7 +36,6 @@ class CreateDirectoryPopup extends React.Component {
 
   render() {
     const {
-      onSubmit = this.defaultFunction,
       onClose = this.defaultFunction
     } = this.props;
     return (
@@ -34,18 +44,16 @@ class CreateDirectoryPopup extends React.Component {
           <div className="app-popup-form-component">
             <AppPopupFormInput
               description="name"
-              name="title"
+              name="name"
               type="text"
               isFocused={true}
-              value={this.state.dirName}
+              value={this.state.name}
               onChange={this.handleInputChange}/>
           </div>
           <div className="app-popup-buttons">
             <button className="app-popup-button">?</button>
             <button className="app-popup-button cancel-button" onClick={onClose}>Cancel</button>
-            <button className="app-popup-button" onClick={() => {
-              onSubmit(this.state)
-            }}>Create
+            <button className="app-popup-button" onClick={this.onSubmit}>Create
             </button>
           </div>
         </div>

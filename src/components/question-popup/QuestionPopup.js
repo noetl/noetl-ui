@@ -7,7 +7,7 @@ import AppPopup from "../app-popup/AppPopup";
  * onCancel: ()=>{}
  * onAccept: (value)=>{}
  * documentationLink: '#'
- * cancelButtonText: 'string'
+ * cancelButtonText: 'No'
  * acceptButtonText: 'Yes'
  */
 class QuestionPopup extends React.Component {
