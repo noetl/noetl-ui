@@ -43,7 +43,7 @@ class CreateDirectoryPopup extends React.Component {
         <div className="app-popup-create-project">
           <div className="app-popup-form-component">
             <AppPopupFormInput
-              autocomplete="off"
+              autoсomplete="off"
               description="name"
               name="name"
               type="text"
