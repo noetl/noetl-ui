@@ -25,7 +25,7 @@ class Tree extends React.Component {
       path: ''
     },
     model: {
-      "name": "root",
+      "name": "templates",
       "root": true,
       "isOpen": true,
       "children": [
@@ -38,7 +38,9 @@ class Tree extends React.Component {
           "children": [
             {"name": "fewqfewq"},
             {"name": "fewqfewfqew"},
-            {"name": "dsaDSA"}
+            {"name": "dsaDSA"},
+            {"name": "demo1"},
+            {"name": "demo2"}
           ]
         },
         {
