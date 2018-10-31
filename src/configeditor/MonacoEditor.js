@@ -12,7 +12,9 @@ class MonacoEditor extends React.Component {
   }
 
   componentDidMount() {
-    this.initMonaco();
+    setTimeout(()=>{
+      this.initMonaco();
+    });
   }
 
   componentDidUpdate(prevProps) {

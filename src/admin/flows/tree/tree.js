@@ -25,7 +25,7 @@ class Tree extends React.Component {
       path: ''
     },
     model: {
-      "name": "templates",
+      "name": "templates", //todo решить проблему с тафтологией (не выводить только имя 1й директории templates)
       "root": true,
       "isOpen": true,
       "children": [
@@ -34,7 +34,7 @@ class Tree extends React.Component {
         },
         {
           "name": "directory1",
-          "isOpen": true,
+          "isOpen": false,
           "children": [
             {"name": "fewqfewq"},
             {"name": "fewqfewfqew"},
@@ -45,7 +45,7 @@ class Tree extends React.Component {
         },
         {
           "name": "directory2",
-          "isOpen": true,
+          "isOpen": false,
           "children": [
             {"name": "dsa"},
             {"name": "AAAAAA"}

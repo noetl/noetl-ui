@@ -77,9 +77,9 @@ class TreeItem extends React.Component {
   sortByDirectories = (array) => {
     let copy = [...array];
     copy.sort(function (a, b) {
-      if (a.children === undefined && b.children !== undefined)
+      if (a['children'] === undefined && b['children'] !== undefined) {
         return 1;
-      else return 0;
+      } else return -1;
     });
     return copy;
   }
