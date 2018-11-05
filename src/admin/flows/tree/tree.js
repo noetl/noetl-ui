@@ -5,6 +5,8 @@ import CreateProjectPopup from "./create-project-popup/CreateProjectPopup";
 import CreateDirectoryPopup from "./create-directory-popup/CreateDirectoryPopup";
 import QuestionPopup from "../../../components/question-popup/QuestionPopup";
 import {createDirectory, createItem, removeObjectTree, setOpenDirectory} from "./treeDataHendle";
+import axios from "axios";
+import {BACKEND_URL} from "../../../env";
 
 class Tree extends React.Component {
   state = {
@@ -25,39 +27,42 @@ class Tree extends React.Component {
       path: ''
     },
     model: {
-      "name": "templates", //todo решить проблему с тафтологией (не выводить только имя 1й директории templates)
+      "name": "templates",
       "root": true,
       "isOpen": true,
-      "children": [
-        {
-          "name": "flow1"
-        },
-        {
-          "name": "directory1",
-          "isOpen": false,
-          "children": [
-            {"name": "fewqfewq"},
-            {"name": "fewqfewfqew"},
-            {"name": "dsaDSA"},
-            {"name": "demo1"},
-            {"name": "demo2"}
-          ]
-        },
-        {
-          "name": "directory2",
-          "isOpen": false,
-          "children": [
-            {"name": "dsa"},
-            {"name": "AAAAAA"}
-          ]
-        }
-      ]
+      "children": []
     }
+
+  }
+
+  componentDidMount() {
+    axios.get(`${BACKEND_URL}/flow/dirtree`)
+      .then(res => {
+        if (res.data.success === undefined) {
+          this.setState(function (state, props) {
+            return {
+              ...state,
+              model: res.data
+            };
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error.response)
+      });
   }
 
   onToggle = (toggled, path) => {
     this.setState(function (state, props) {
       return {...state, model: setOpenDirectory(state.model, path, toggled)};
+    }, () => {
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => {
+          console.log(error.response)
+        });
     });
   }
 
@@ -73,13 +78,34 @@ class Tree extends React.Component {
   }
 
   onAcceptCreateProjectPopup = (value) => {
-    this.setState(function (state, props) {
-      return {
-        ...state,
-        createNewProjectPopup: {isOpen: false, path: ''},
-        model: createItem(state.model, state.createNewProjectPopup.path, value.name)
-      };
-    });
+    axios.post(`${BACKEND_URL}/flow/template`,
+      {
+        id: `/${this.state.createNewProjectPopup.path}/${value.name}`,
+        config: ""
+      })
+      .then(res => {
+        if (res.data.success) {
+          this.setState(function (state, props) {
+            return {
+              ...state,
+              createNewProjectPopup: {isOpen: false, path: ''},
+              model: createItem(state.model, state.createNewProjectPopup.path, value.name)
+            };
+          }, () => {
+            axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
+              .then(res => {
+                console.log(res)
+              })
+              .catch(error => {
+                console.log(error.response)
+              });
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error.response)
+      });
+
   }
 
   // new dir
@@ -100,6 +126,14 @@ class Tree extends React.Component {
         createNewDirectoryPopup: {isOpen: false, path: ''},
         model: createDirectory(state.model, state.createNewDirectoryPopup.path, value.name)
       };
+    }, () => {
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => {
+          console.log(error.response)
+        });
     });
   }
 
@@ -117,6 +151,14 @@ class Tree extends React.Component {
         removeDirectoryQuestionPopup: {isOpen: false, path: ''},
         model: removeObjectTree(state.model, state.removeDirectoryQuestionPopup.path)
       };
+    }, () => {
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => {
+          console.log(error.response)
+        });
     });
   }
 

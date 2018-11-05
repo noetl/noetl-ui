@@ -38,7 +38,6 @@ class Admin extends React.Component {
                        to={`${match.url}/flows`}>flows</NavLink>
               <NavLink className="menu-item" activeClassName="router-link-active"
                        to={`${match.url}/processes`}>processes</NavLink>
-              <NavLink className="menu-item" to={`/flowconf`}>editor</NavLink>
             </div>
             <div className="flow-header-panel-buttons">
               <button className="flow-header-panel-buttons run"
