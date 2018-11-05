@@ -1,19 +1,23 @@
 const initialState = {
-  lang: 'ru',
-  langs: null
+  tree: {
+    "name": "templates",
+    "root": true,
+    "isOpen": true,
+    "children": []
+  }
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'CHANGE_LANG':
+    case 'UPDATE_TREE':
       return {
         ...state,
-        lang: action.lang
+        tree: action.tree
       };
-    case 'GET_LANGS':
+    case 'GET_TREE':
       return {
         ...state,
-        langs: action.langs
+        tree: action.tree
       };
     default:
   }
