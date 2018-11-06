@@ -19,3 +19,6 @@ spec:
         image: docker.io/noetl/noetl-ui:latest
         ports:
         - containerPort: 80
+        env:
+        - name: NOETL_BACKEND_URL
+          value: "noetl-backend.default:8888"

@@ -1,6 +1,6 @@
 all: build push
 
-TAG=0.1.1
+TAG=0.1.2
 REPO=noetl
 PROJECT=noetl-ui
 
