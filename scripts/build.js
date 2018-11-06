@@ -26,6 +26,17 @@ const printHostingInstructions = require('react-dev-utils/printHostingInstructio
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
 
+if (process.env.PACKEGE_ANALYZER === 'true') {
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+  config.plugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: "report.html",
+    })
+  )
+}
+
+
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;

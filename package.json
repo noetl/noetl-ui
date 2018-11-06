@@ -55,6 +55,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "packege_analyzer": "export PACKEGE_ANALYZER=true && node scripts/build.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
@@ -103,6 +104,7 @@
   "devDependencies": {
     "monaco-editor-webpack-plugin": "^1.5.4",
     "node-sass": "^4.10.0",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "webpack-bundle-analyzer": "^3.0.3"
   }
 }
