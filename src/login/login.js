@@ -5,6 +5,8 @@ import AppPopup from "../components/app-popup/AppPopup";
 import {AppPopupFormInput} from "../components/app-popup/AppPopupFormControls";
 import authorization from "../authorization/authorization";
 import {Redirect} from "react-router-dom";
+import {LOGIN, PASSWORD} from "../env";
+import {setObject} from "../LocalStorage";
 
 
 class Login extends React.Component {
@@ -20,7 +22,8 @@ class Login extends React.Component {
   }
 
   onSubmit = () => {
-    if(this.state.login==='noetl' && this.state.password==='noetl'){
+    if (this.state.login === LOGIN && this.state.password === PASSWORD) {
+      setObject("AUTHORIZATION", this.state);
       authorization.authenticate(() => {
         this.setState(() => ({
           redirectToReferrer: true
@@ -31,15 +34,19 @@ class Login extends React.Component {
   };
 
   componentDidMount() {
-
+    if (authorization.isAuthenticated) {
+      this.setState(() => ({
+        redirectToReferrer: true
+      }))
+    }
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { redirectToReferrer } = this.state;
+    const {from} = this.props.location.state || {from: {pathname: '/'}};
+    const {redirectToReferrer} = this.state;
 
     if (redirectToReferrer === true) {
-      return <Redirect to={from} />
+      return <Redirect to={from}/>
     }
     return (
       <div className="login_page">
