@@ -1,6 +1,7 @@
+.PHONY: all test clean build
 all: build push
 
-TAG=0.1.2
+TAG=0.1.3
 REPO=noetl
 PROJECT=noetl-ui
 
