@@ -44,7 +44,9 @@ class RunFlowPopup extends React.Component {
   }
 
   updateDimensions = () => {
-    this.editor.layout();
+    setTimeout(()=>{
+      this.editor.layout();
+    })
   }
 
   componentDidMount() {

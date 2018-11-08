@@ -56,13 +56,7 @@ class Tree extends React.Component {
     this.setState(function (state, props) {
       return {...state, model: setOpenDirectory(state.model, path, toggled)};
     }, () => {
-      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(error => {
-          console.log(error.response)
-        });
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model);
     });
   }
 
@@ -92,13 +86,7 @@ class Tree extends React.Component {
               model: createItem(state.model, state.createNewProjectPopup.path, value.name)
             };
           }, () => {
-            axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
-              .then(res => {
-                console.log(res)
-              })
-              .catch(error => {
-                console.log(error.response)
-              });
+            axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model);
           });
         }
       })
@@ -114,8 +102,6 @@ class Tree extends React.Component {
   }
 
   onCreateDirectoryEvent = (path) => {
-    console.log('onCreateDirectoryEvent');
-    console.log(path);
     this.setState({createNewDirectoryPopup: {isOpen: true, path}});
   }
 
@@ -127,38 +113,27 @@ class Tree extends React.Component {
         model: createDirectory(state.model, state.createNewDirectoryPopup.path, value.name)
       };
     }, () => {
-      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(error => {
-          console.log(error.response)
-        });
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model);
     });
   }
 
   // remove dir
   onRemoveDirectoryEvent = (path) => {
-    console.log('onRemoveDirectoryEvent');
-    console.log(path);
     this.setState({removeDirectoryQuestionPopup: {isOpen: true, path}});
   }
 
   onAcceptRemoveDirectory = () => {
+    let dirPath = '';
     this.setState(function (state, props) {
+      dirPath = state.removeDirectoryQuestionPopup.path;
       return {
         ...state,
         removeDirectoryQuestionPopup: {isOpen: false, path: ''},
         model: removeObjectTree(state.model, state.removeDirectoryQuestionPopup.path)
       };
     }, () => {
-      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(error => {
-          console.log(error.response)
-        });
+      axios.delete(`${BACKEND_URL}/flow/templates`, {data: {path: `/${dirPath}/`}});
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model);
     });
   }
 
@@ -168,17 +143,20 @@ class Tree extends React.Component {
 
   // remove flow
   onRemoveFlowEvent = (path) => {
-    console.log('onRemoveFlowEvent');
-    console.log(path);
     this.setState({removeFlowQuestionPopup: {isOpen: true, path}});
   }
   onAcceptRemoveFlow = () => {
+    let path = '';
     this.setState(function (state, props) {
+      path = state.removeFlowQuestionPopup.path;
       return {
         ...state,
         removeFlowQuestionPopup: {isOpen: false, path: ''},
         model: removeObjectTree(state.model, state.removeFlowQuestionPopup.path)
       };
+    }, () => {
+      axios.delete(`${BACKEND_URL}/flow/template`, {data: {id: `/${path}`}});
+      axios.post(`${BACKEND_URL}/flow/dirtree`, this.state.model);
     });
   }
 
