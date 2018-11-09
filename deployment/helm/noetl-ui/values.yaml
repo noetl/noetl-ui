@@ -1,0 +1,38 @@
+replicaCount: 1
+
+image:
+  repository: docker.io/noetl/noetl-ui
+  tag: 0.1.4
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  loadBalancerIP: 146.148.98.125
+  port: 80
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: noetl
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - mlflow.io
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

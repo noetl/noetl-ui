@@ -4,11 +4,12 @@ import './admin.scss'
 import Processes from "./processes/processes";
 import Flows from "./flows/flows";
 import RunFlowPopup from "./run-flow-popup/RunFlowPopup";
+import TestFlowPopup from "./test-flow-popup/TestFlowPopup";
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpenRunFlowPopup: false,
+      isOpenRunFlowPopup: true,
       numberOfGuests: 2
     };
     this.defaultFunction = () => {
@@ -45,7 +46,7 @@ class Admin extends React.Component {
               onClick={this.onClickButtonRun}>
                 <i className="fas fa-caret-right"></i>
               </button>
-              {this.state.isOpenRunFlowPopup?<RunFlowPopup onClose={this.closeRunFlowPopup}/>:null}
+              {this.state.isOpenRunFlowPopup?<TestFlowPopup onClose={this.closeRunFlowPopup}/>:null}
               <button className="flow-header-panel-buttons help">
                 ?
               </button>

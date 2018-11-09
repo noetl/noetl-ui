@@ -21,7 +21,9 @@ export class AppPopupFormInput extends React.Component{
     const {isFocused = false} = this.props;
     if(isFocused) {
       setTimeout(()=>{
-        this.nameInput.focus();
+        if (this.nameInput != null) {
+          this.nameInput.focus();
+        }
       });
     }
   }
@@ -48,7 +50,9 @@ export class AppPopupFormTextarea extends React.Component{
     const {isFocused = false} = this.props;
     if(isFocused) {
       setTimeout(()=>{
-        this.nameInput.focus();
+        if (this.nameInput != null) {
+          this.nameInput.focus();
+        }
       });
     }
   }
