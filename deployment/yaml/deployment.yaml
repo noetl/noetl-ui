@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: noetl-ui
-        image: docker.io/noetl/noetl-ui:latest
+        image: docker.io/noetl/noetl-ui:0.1.4
         ports:
         - containerPort: 80
         env:
