@@ -9,7 +9,7 @@ class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpenRunFlowPopup: true,
+      isOpenRunFlowPopup: false,
       numberOfGuests: 2
     };
     this.defaultFunction = () => {
